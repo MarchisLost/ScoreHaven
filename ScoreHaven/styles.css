@@ -1,17 +1,19 @@
-	/*Background HomePage */	
-	html,
-	body,
-	header,
-	#homeimage{
+	/*Background HomePage */
+	
+	body {
+		padding-top: 60px;
 		height: 100%;
-	}	
-
-	#homeimage{
-		background: url(stadium.png) no-repeat center fixed; 
 		-webkit-background-size: cover;
 		-moz-background-size: cover;
 		-o-background-size: cover;
 		background-size: cover;
-	}
-	
+		background-color: #cccccc;
+		background: no-repeat center fixed; 
+	}	
 
+	.img-fluid {
+		left: 0px;
+		height: 100%;
+		width: 100%;
+		position: fixed;
+	}
