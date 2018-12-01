@@ -1,0 +1,43 @@
+	@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700');
+
+	*{
+		padding:0;
+		margin:0;
+	}
+	
+	html {
+		-webkit-background-size: cover;
+		-moz-background-size: cover;
+		-o-background-size: cover;
+		background-size: cover;
+		background: no-repeat center fixed; 
+	}	
+
+	body {
+		min-height: 100vh;
+		padding-top: 60px;
+	}
+
+	.img-fluid {
+		left: 0px;
+		height: 100%;
+		width: 100%;
+		position: fixed;
+	}
+
+	#logo_navbar_text_type {
+	  font: normal 36px 'Cookie', cursive;
+	}
+
+	#logo_text_color{
+	  color:  #732b2b;
+	}
+
+	footer{
+	position: fixed;
+	bottom: 0;
+	}
+
+	@media (max-height:800px){
+		footer { position: static; }
+	}
