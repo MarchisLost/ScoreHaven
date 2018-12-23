@@ -88,7 +88,7 @@
 	    	        <a class="nav-link" href="index">Soccer<span class="sr-only">(current)</span></a>
 	    	      </li>
 	    	      <li class="nav-item">
-	    	        <a class="nav-link" href="basketball">Basketball</a>
+	    	        <a class="nav-link" href="basketball.php">Basketball</a>
 	    	      </li>
 	    	      <li class="nav-item">
 	    	        <a class="nav-link" href="volleyball">Volleyball</a>

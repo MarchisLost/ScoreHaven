@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; 
-    charset=ISO 8859-1">
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO 8859-1">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>ScoreHaven - Sign in</title>
 
-    <!-- All sizes including Android,iOS... Favicon -->
-    <link rel="apple-touch-icon-precomposed" sizes="57x57" href="img/favicon/apple-touch-icon-57x57.png" />
+  <!-- All sizes including Android,iOS... Favicon -->
+  <link rel="apple-touch-icon-precomposed" sizes="57x57" href="img/favicon/apple-touch-icon-57x57.png" />
 	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="img/favicon/apple-touch-icon-114x114.png" />
 	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="img/favicon/apple-touch-icon-72x72.png" />
 	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="img/favicon/apple-touch-icon-144x144.png" />
@@ -45,11 +44,68 @@
     <!-- End of the links for the footer style -->
 
     <!-- CSS files -->
-    <link rel="stylesheet" href="login/css/sign_in.css">
+    CSS files <link rel="stylesheet" href="login/css/sign_in.css">
     <!-- End of CSS files -->
 
 </head>
 <body>
+
+<!-- Confirmação dos dados inseridos pelo utilizador -->
+<?php
+
+ // header("Content-Type: text/html; charset=ISO 8859-1",true);esta a dar o mesmo erro do session start, dunno why
+
+  include 'conecta_bd.php';
+
+  if(isset($_POST["login_btn"])){ 
+
+    session_start();
+
+    $name= $_POST["username"]; //receber os dados que o utilizador escreveu
+
+    //codigo pra ir buscar o salt a bd
+    /*$sql_salt="select salt from encript";                 
+    $sql_s= mysqli_query($ligacao, $sql_salt);
+    $salt= mysqli_fetch_assoc($sql_s);*/
+    //echo $salt; //debug
+
+    $salt="pedro123david";
+    $passw=md5($_POST["password"], $salt);
+    //echo $passw; //debug
+    $sql_r="select password from utilizador where username= '$name'";
+    $sql_pw= mysqli_query($ligacao, $sql_r);
+    $pw= mysqli_fetch_assoc($sql_pw);
+     
+    $pwi=md5($pw['password'], $salt);
+    //compara a pw que o utilizador com a que esta guardada na bd
+    //se for verdadeiro vai buscar os dados a bd sobre esse utilizador e gurdados na session onde vao ser usados no dados.php
+    if($pwi == $passw){
+      $sel_sql="select username from users where username= '$name'";
+      $info= mysqli_query($ligacao, $sel_sql);
+      $data= mysqli_fetch_assoc($info);
+        
+      $_SESSION["username"]=$data['username'];
+      //echo "aaaaaaaaaaaaaaa"; //debug
+      header("Location: dados.php");
+
+    }else{
+?>
+      <div class="container">
+        <div class="alert alert-warning">
+          <strong>Warning!</strong> Username or password incorrect, try again please.
+        </div>
+      </div>
+
+      <!--ou-->
+
+      <!--<script>
+        alert("O seu username ou password estão incorretos \nTorne a inserir os dados! \nObrigado!");
+      </script>-->
+
+<?php
+    }
+  }
+?>  
 
   <div class="container">
     <div class="row">
@@ -59,12 +115,12 @@
             <h5 class="card-title text-center">Sign In</h5>
             <form class="form-signin" method="post">
               <div class="form-label-group">
-                <input type="text" id="inputUsername" name="username" class="form-control" placeholder="Username" required autofocus>
+                <input type="text" value="david" id="inputUsername" name="username" class="form-control" placeholder="Username" required autofocus>
                 <label for="inputUsername">Username</label>
               </div>
 
               <div class="form-label-group">
-                <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
+                <input type="password" value="admin" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
                 <label for="inputPassword">Password</label>
               </div>
 
@@ -81,7 +137,7 @@
   </div>
 
 <!-- Footer -->
-    <footer class="bg-dark">
+<footer class="bg-dark">
       <div class="container">
       	<br>
         <p  id="company" class="m-0 text-center text-white">Copyright &copy; ScoreHaven 2018</p>
@@ -90,62 +146,6 @@
       </div>
     </footer>
 <!-- End of Footer -->
-
-<!-- Confirmação dos dados inseridos pelo utilizador -->
-<?php
-
-  header("Content-Type: text/html; charset=ISO 8859-1",true);
-
-  include 'conecta_bd.php';
-
-  function request_db( $sql_r ) {
-    $sql= mysqli_query($ligacao, $sql_r);
-    $pw= mysqli_fetch_assoc($sql);
-    return( $pw );
-  }
-
-  if(isset($_POST["login_btn"])){ 
-
-        session_start();
- 
-        $name= $_POST["username"]; //receber os dados que o utilizador escreveu
-
-        $sql_salt="select salt from encript";
-        $sql_s= request_db($sql_salt);
-
-        $st="asd";
-        $passw=md5($_POST["password"], $st);
-        //echo $passw; debug
-        $sql_r="select password from users where username= '$name'";
-        $sql_select= request_db($sql_r);
-
-       /* $sql= mysqli_query($ligacao, $select_sql);
-        $pw= mysqli_fetch_assoc($sql);*/
-         
-        $pwi=md5($pw['password'], $st);
-         
-        //compara a pw que o utilizador com a que esta guardada na bd
-        //se for verdadeiro vai buscar os dados a bd sobre esse utilizador e gurdados na session onde vao ser usados no dados.php
-        if($pwi == $passw){
-          $sel_sql="select username from users where username= '$name'";
-          $info= mysqli_query($ligacao, $sel_sql);
-          $data= mysqli_fetch_assoc($info);
-           
-          $_SESSION["username"]=$data['username'];
-
-          header("Location: dados.php");
-
-        }else{
-?>
-          <div class="container">
-            <div class="alert alert-warning">
-              <strong>Warning!</strong> Username or password incorrect, try again please.
-            </div>
-          </div>
-<?php
-        }
-  }
-?>    
 
 </body>
 </html>

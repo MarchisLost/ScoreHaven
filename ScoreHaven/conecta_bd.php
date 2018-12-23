@@ -1,7 +1,7 @@
 <?php
 		$servidor = "localhost";
 		$utilizador = "root";
-		$pass = "";
+		$pass = "#Qwerty3";
 		$bd = "scorehaven";
 		$ligacao = new mysqli($servidor, $utilizador, $pass, $bd);
 

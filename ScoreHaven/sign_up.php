@@ -1,82 +1,3 @@
-<?php 
-    
-    /*header("Content-Type: text/html; charset=ISO 8859-1",true);
-
-    include 'conecta_bd.php';
-
-    if (isset($_POST['register_btn'])) {
-
-        session_start();
-        
-        $username = $_POST["username"];
-        $email = $_POST["email"];
-        $password = $_POST["password"];
-        $password2 = $_POST["password2"];
-        $allowed_d = array('@gmail.com', '@outlook.com', '@outlook.pt');
-
-        function match($allowed_d, $email)
-        {
-          foreach($allowed_d as $allowed){
-            if (strpos($email, $allowed) !== false) {
-              return true;
-            }
-          }
-          return false;
-        }
-
-        if(!match($allowed_d, $email)){
-?>
-          <div class="container">
-            <div class="alert alert-warning">
-              <strong>Warning!</strong> Enter only trusted email address providers
-            </div>
-          </div>
-<?php
-        }
-        elseif ($password == $password2) {
-
-          $select_u = mysqli_query($ligacao, "SELECT `username` FROM `users` WHERE `username` = '".$_POST['username']."'") or exit(mysqli_error($ligacao));
-          $select_m = mysqli_query($ligacao, "SELECT `email` FROM `users` WHERE `email` = '".$_POST['email']."'") or exit(mysqli_error($ligacao));
-          if(mysqli_num_rows($select_m)) {
-?>
-            <div class="container">
-              <div class="alert alert-warning">
-                <strong>Warning!</strong> The email is already being used
-              </div>
-            </div>
-<?php
-          }
-          elseif(mysqli_num_rows($select_u)) {
-?>
-              <div class="container">
-                <div class="alert alert-warning">
-                  <strong>Warning!</strong> Username already exists!
-                </div>
-              </div>
-<?php    
-          }
-          else{
-            // create user
-            $password = md5($password); //hash password before storing for security purposes
-            $sql = "INSERT INTO users(username, email, password) VALUES('$username', '$email', '$password')";
-            mysqli_query($ligacao, $sql);
-            header("location: success.php"); //redirect to sucess page 
-          }
-
-        }else{
-?>
-          <div class="container">
-            <div class="alert alert-warning">
-              <strong>Warning!</strong> The 2 passwords must be equal
-            </div>
-          </div>
-<?php
-        }
-    }
- 
-    $ligacao -> close();*/
-?>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -129,7 +50,86 @@
 
 </head>
 <body>
-    
+
+<?php    
+    header("Content-Type: text/html; charset=ISO 8859-1",true);
+
+    include 'conecta_bd.php';
+
+    if (isset($_POST['register_btn'])) {
+
+        session_start();
+        
+        //informações introduzidas pelo utilizador
+        $username = $_POST["username"];
+        $email = $_POST["email"];
+        $password = $_POST["password"];
+        $password2 = $_POST["password2"];
+        $allowed_d = array('@gmail.com', '@outlook.com', '@outlook.pt');
+
+        function match($allowed_d, $email)
+        {
+          foreach($allowed_d as $allowed){
+            if (strpos($email, $allowed) !== false) {
+              return true;
+            }
+          }
+          return false;
+        }
+
+        if(!match($allowed_d, $email)){
+?>
+          <div class="container">
+            <div class="alert alert-warning">
+              <strong>Warning!</strong> Enter only trusted email address providers
+            </div>
+          </div>
+<?php
+        }
+        elseif ($password == $password2) {
+
+          $select_u = mysqli_query($ligacao, "SELECT `username` FROM `utilizador` WHERE `username` = '".$_POST['username']."'") or exit(mysqli_error($ligacao));
+          $select_m = mysqli_query($ligacao, "SELECT `email` FROM `utilizador` WHERE `email` = '".$_POST['email']."'") or exit(mysqli_error($ligacao));
+          if(mysqli_num_rows($select_m)) {
+?>
+            <div class="container">
+              <div class="alert alert-warning">
+                <strong>Warning!</strong> The email is already being used
+              </div>
+            </div>
+<?php
+          }
+          elseif(mysqli_num_rows($select_u)) {
+?>
+              <div class="container">
+                <div class="alert alert-warning">
+                  <strong>Warning!</strong> Username already exists!
+                </div>
+              </div>
+<?php    
+          }
+          else{
+            // create user
+            $password = md5($password); //hash password before storing for security purposes
+            $sql = "INSERT INTO utilizadores(username, email, password) VALUES('$username', '$email', '$password')";
+            mysqli_query($ligacao, $sql);
+            header("location: success.php"); //redirect to sucess page 
+          }
+
+        }else{
+?>
+          <div class="container">
+            <div class="alert alert-warning">
+              <strong>Warning!</strong> The 2 passwords must be equal!
+            </div>
+          </div>
+<?php
+        }
+    }
+ 
+    $ligacao -> close();
+?>
+
   <div class="container">
     <div class="row">
       <div class="col-lg-10 col-xl-9 mx-auto">
