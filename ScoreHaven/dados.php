@@ -14,35 +14,29 @@
   </head>
   <body>
 
-<?php
-  session_start();
-?>
-    <table> 
+  <table> <!-- class="table table-hover"  ao meter isto a tabela expande se horizontalmente-->
       <thead> 
         <tr>
           <th scope="col">Nome</th>
-          <th scope="col">Idade</th>
-          <th scope="col">Numero de Aluno</th>
+          <th scope="col">Email</th>
         </tr>
       </thead>
 <?php
-          header("Content-Type: text/html; charset=ISO 8859-1",true);
-          
-          include 'conecta_bd.php';         
+      header("Content-Type: text/html; charset=ISO 8859-1",true);
+
+      session_start();
+      include 'conecta_bd.php';       
 ?>
-              <form method="post" action="logoff.php">
-                <tbody>
-                  <tr>
-                    <td><?php echo $_SESSION["nome"];?></td>                      
-                    <td><?php echo $_SESSION["idade"];?></td>
-                    <td><?php echo $_SESSION["numaluno"];?></td>
-                  </tr>
-                 </tbody> 
-                 <button id="logoff" type="submit" class="btn btn-success" >Log Off</button>
-              </form>
-
+      <form method="post" action="logoff.php">
+        <tbody>
+          <tr>
+            <td><?php echo $_SESSION["username"];?></td>                      
+            <td><?php echo $_SESSION["mail"];?></td>
+          </tr>
+        </tbody> 
+        <button type="submit" >Log Off</button>
+      </form>
 <?php 
-
           $ligacao -> close();
 ?>
     </table>

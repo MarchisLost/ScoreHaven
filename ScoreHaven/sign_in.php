@@ -44,7 +44,7 @@
     <!-- End of the links for the footer style -->
 
     <!-- CSS files -->
-    <link rel="stylesheet" href="login/css/sign_in.css">
+    CSS files <link rel="stylesheet" href="login/css/sign_in.css">
     <!-- End of CSS files -->
 
 </head>
@@ -80,12 +80,13 @@
     //compara a pw que o utilizador com a que esta guardada na bd
     //se for verdadeiro vai buscar os dados a bd sobre esse utilizador e gurdados na session onde vao ser usados no dados.php
     if($pwi == $passw){
-      $sel_sql="select username from users where username= '$name'";
+      $sel_sql="select username, email from utilizador where username= '$name'";
       $info= mysqli_query($ligacao, $sel_sql);
       $data= mysqli_fetch_assoc($info);
         
       $_SESSION["username"]=$data['username'];
-      //echo "aaaaaaaaaaaaaaa"; //debug
+      $_SESSION["mail"]=$data['email'];
+      //echo "aaaaaaaaaaaaaaahhh"; //debug
       header("Location: dados.php");
 
     }else{

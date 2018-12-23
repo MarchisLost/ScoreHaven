@@ -85,8 +85,8 @@
             </div>
           </div>
 <?php
-        }
-        elseif ($password == $password2) {
+        //Proximas linhas verificam se o username ou email ja existem
+        }elseif ($password == $password2) {
 
           $select_u = mysqli_query($ligacao, "SELECT `username` FROM `utilizador` WHERE `username` = '".$_POST['username']."'") or exit(mysqli_error($ligacao));
           $select_m = mysqli_query($ligacao, "SELECT `email` FROM `utilizador` WHERE `email` = '".$_POST['email']."'") or exit(mysqli_error($ligacao));
@@ -98,14 +98,13 @@
               </div>
             </div>
 <?php
-          }
-          elseif(mysqli_num_rows($select_u)) {
+          }elseif(mysqli_num_rows($select_u)) {
 ?>
-              <div class="container">
-                <div class="alert alert-warning">
-                  <strong>Warning!</strong> Username already exists!
-                </div>
+            <div class="container">
+              <div class="alert alert-warning">
+                <strong>Warning!</strong> Username already exists!
               </div>
+            </div>
 <?php    
           }
           else{
