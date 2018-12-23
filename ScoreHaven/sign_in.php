@@ -44,7 +44,7 @@
     <!-- End of the links for the footer style -->
 
     <!-- CSS files -->
-    CSS files <link rel="stylesheet" href="login/css/sign_in.css">
+    <link rel="stylesheet" href="login/css/sign_in.css">
     <!-- End of CSS files -->
 
 </head>
