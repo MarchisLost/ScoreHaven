@@ -88,7 +88,7 @@
 	    	        <a class="nav-link" href="index">Soccer<span class="sr-only">(current)</span></a>
 	    	      </li>
 	    	      <li class="nav-item">
-	    	        <a class="nav-link" href="basketball">Basketball</a>
+	    	        <a class="nav-link" href="basketball.php">Basketball</a>
 	    	      </li>
 	    	      <li class="nav-item">
 	    	        <a class="nav-link" href="volleyball">Volleyball</a>
@@ -109,8 +109,8 @@
 	    	      </li>
 	    	    </ul>
 	    	    	<div>
-	    		    	<a class="btn btn-outline-secondary" href="creat_acc" role="button">Create Account</a>
-	    		    	<a class="btn btn-outline-success" href="login" role="button">LOGIN</a>
+	    		    	<a class="btn btn-outline-secondary" href="sign_up.php" role="button">Create Account</a>
+	    		    	<a class="btn btn-outline-success" href="sign_in.php" role="button">LOGIN</a>
 	    		    </div>
 	    	  </div>
 	    </div>
