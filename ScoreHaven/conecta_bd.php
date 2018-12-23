@@ -2,7 +2,7 @@
 		$servidor = "localhost";
 		$utilizador = "root";
 		$pass = "";
-		$bd = "authentication";
+		$bd = "scorehaven";
 		$ligacao = new mysqli($servidor, $utilizador, $pass, $bd);
 
 		if ($ligacao -> connect_error){
