@@ -65,9 +65,9 @@
         $email = $_POST["email"];
         $password = $_POST["password"];
         $password2 = $_POST["password2"];
-        $allowed_d = array('@gmail.com', '@outlook.com', '@outlook.pt');
+        $allowed_d = array('@gmail.com', '@outlook.com', '@outlook.pt'); //criaçao dos emails que sao aceitaveis de colocar
 
-        function match($allowed_d, $email)
+        function match($allowed_d, $email) //criaçao da funçao para verificar se o mail e valido
         {
           foreach($allowed_d as $allowed){
             if (strpos($email, $allowed) !== false) {
@@ -77,7 +77,8 @@
           return false;
         }
 
-        if(!match($allowed_d, $email)){
+        if(!match($allowed_d, $email)){//verifica se existe algum dos emails validos no email escrito pelo utilizador, caso
+        	//nao exista, e mostrado o aviso abaixo
 ?>
           <div class="container">
             <div class="alert alert-warning">
@@ -86,10 +87,12 @@
           </div>
 <?php
         //Proximas linhas verificam se o username ou email ja existem
-        }elseif ($password == $password2) {
-
+        }elseif ($password == $password2) { //condiçao que verifica se a o email e/ou username ja esta em uso por outro utilizador
+        	//criaçao de variaveis que verificam se o email/username introduzido pelo user ja exista algures na bd
           $select_u = mysqli_query($ligacao, "SELECT `username` FROM `utilizador` WHERE `username` = '".$_POST['username']."'") or exit(mysqli_error($ligacao));
           $select_m = mysqli_query($ligacao, "SELECT `email` FROM `utilizador` WHERE `email` = '".$_POST['email']."'") or exit(mysqli_error($ligacao));
+           //Os 2 if abaixo sao para retornar avisos ao utilizador de que o email/username ja existe caso uma das variaveis encontre
+          //um username/email iguais
           if(mysqli_num_rows($select_m)) {
 ?>
             <div class="container">
