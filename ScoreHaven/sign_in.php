@@ -72,7 +72,7 @@
     $salt="pedro123david";
     $passw=md5($_POST["password"], $salt);
     //echo $passw; //debug
-    $sql_r="select password from utilizador where username= '$name'";
+    $sql_r="select pass from utilizador where username= '$name'";
     $sql_pw= mysqli_query($ligacao, $sql_r);
     $pw= mysqli_fetch_assoc($sql_pw);
      
