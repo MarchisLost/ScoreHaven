@@ -91,7 +91,7 @@
         	//criaçao de variaveis que verificam se o email/username introduzido pelo user ja exista algures na bd
           $select_u = mysqli_query($ligacao, "SELECT `username` FROM `utilizador` WHERE `username` = '".$_POST['username']."'") or exit(mysqli_error($ligacao));
           $select_m = mysqli_query($ligacao, "SELECT `email` FROM `utilizador` WHERE `email` = '".$_POST['email']."'") or exit(mysqli_error($ligacao));
-           //Os 2 if abaixo sao para retornar avisos ao utilizador de que o email/username ja existe caso uma das variaveis encontre
+          //Os 2 if abaixo sao para retornar avisos ao utilizador de que o email/username ja existe caso uma das variaveis encontre
           //um username/email iguais
           if(mysqli_num_rows($select_m)) {
 ?>
@@ -111,13 +111,22 @@
 <?php    
           }
           else{
-            // create user
+            $sql="select max(id_u) as max_id_u from utilizador";
+            $res=$ligacao -> query($sql);
+            $linha = $res -> fetch_assoc();
+            if($res -> num_rows > 0){
+              $prox_id_u=$linha['max_id_u']+1;
+            }else{
+              $prox_id_u='1';
+            }
             $password = md5($password); //hash password before storing for security purposes
-            $sql = "INSERT INTO utilizadores(username, email, password) VALUES('$username', '$email', '$password')";
-            mysqli_query($ligacao, $sql);
-            header("location: success.php"); //redirect to sucess page 
-          }
-
+            $insert = "INSERT INTO utilizador (id_u, username, email, data_insc, pass, id_d, id_l, id_e) VALUES (NULL, '$username', '$email', NULL, '$password', NULL, NULL, NULL )";      
+            if (mysqli_query($ligacao, $insert)) {
+              header("location: success.php");
+            } else {
+              echo "Error: " . $insert . "<br>" . mysqli_error($ligacao);
+            }        
+          } 
         }else{
 ?>
           <div class="container">
