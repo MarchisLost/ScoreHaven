@@ -87,7 +87,7 @@
 
       $_SESSION["username"]=$data['username'];
       $_SESSION["email"]=$data['email'];
-	  $_SESSION["id"]=$data['id'];
+	    $_SESSION["id"]=$data['id'];
       //echo "aaaaaaaaaaaaaaahhh"; //debug
 
       header("Location: login/user_profile.php");
