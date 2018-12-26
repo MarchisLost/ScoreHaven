@@ -1,7 +1,27 @@
+<?php
+    header("Content-Type: text/html; charset=ISO 8859-1",true);
+
+    include '../conecta_bd.php';
+
+  	session_start();
+
+    $user_id=$_SESSION["id"];
+
+    $sql_sport="select sport.sport_name from sport inner join users on sport.id_sport = users.fav_s where users.id='$user_id'";
+    $execute_sport = mysqli_query($ligacao, $sql_sport);
+
+    $sql_team="select team.team_name from team inner join users on team.id_team = users.fav_t where users.id=$user_id";
+    $execute_team = mysqli_query($ligacao, $sql_team);
+
+    $sql_player="select player.player_name from player inner join users on player.id_player = users.fav_p where users.id=$user_id";
+    $execute_player = mysqli_query($ligacao, $sql_player);
+
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
-    <title></title>
+    <title><?php echo $_SESSION["username"];?>'s Profile</title>
 
       <!-- Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
@@ -91,10 +111,10 @@
                     <div class="col-md-6">
                         <div class="profile-head">
                                     <h5>
-                                        Username (Ir buscar a bd)
+                                    	<?php echo $_SESSION["username"];?>´s Profile
                                     </h5>
                                     <h6>
-                                        Email (Ir buscar a bd)
+                                        <?php echo $_SESSION["email"];?>
                                     </h6>
                                     <p class="proile-rating">Member since : <span>Data (Ir buscar a bd)</span></p>
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -131,7 +151,7 @@
                                                 <label>Username</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>Ir buscar a bd</p>
+                                                <p><?php echo $_SESSION["username"];?></p>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -139,7 +159,7 @@
                                                 <label>Email</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>Ir buscar a bd</p>
+                                                <p><?php echo $_SESSION["email"];?></p>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -147,7 +167,19 @@
                                                 <label>Favourite Sport</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>Ir buscar a bd</p>
+                                                <p>    
+<?php
+                                                    if ($execute_sport !== false) {
+                                                        while($linha = mysqli_fetch_array($execute_sport)){
+                                                            $sql_sport = $linha['sport_name'];
+
+                                                            echo $sql_sport;
+                                                        }
+                                                    }else {
+                                                        echo 'Choose one on the settings tab';
+                                                    }
+?>
+                                                </p>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -155,7 +187,19 @@
                                                 <label>Favourite Team</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>Ir buscar a bd</p>
+                                                <p>
+<?php
+                                                    if ($execute_team !== false) {
+                                                        while($linha = mysqli_fetch_array($execute_team)){
+                                                            $sql_team = $linha['team_name'];
+
+                                                            echo $sql_team;
+                                                        }
+                                                    }else {
+                                                        echo 'Choose one on the settings tab';
+                                                    }
+?>
+                                                </p>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -163,7 +207,19 @@
                                                 <label>Favourite Player</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>Ir buscar a bd</p>
+                                                <p>
+<?php
+                                                    if ($execute_player !== false) {
+                                                        while($linha = mysqli_fetch_array($execute_player)){
+                                                            $sql_player = $linha['player_name'];
+
+                                                            echo $sql_player;
+                                                        }
+                                                    }else {
+                                                        echo 'Choose one on the settings tab';
+                                                    }
+?>
+                                                </p>
                                             </div>
                                         </div>
                             </div>

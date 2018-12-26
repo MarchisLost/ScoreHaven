@@ -44,7 +44,7 @@
     <!-- End of the links for the footer style -->
 
     <!-- CSS files -->
-    CSS files <link rel="stylesheet" href="login/css/sign_in.css">
+    <link rel="stylesheet" href="login/css/sign_in.css">
     <!-- End of CSS files -->
 
 </head>
@@ -54,6 +54,8 @@
 <?php
 
  // header("Content-Type: text/html; charset=ISO 8859-1",true);esta a dar o mesmo erro do session start, dunno why
+
+  header("Content-Type: text/html; charset=ISO 8859-1",true);
 
   include 'conecta_bd.php';
 
@@ -69,25 +71,26 @@
     $salt= mysqli_fetch_assoc($sql_s);*/
     //echo $salt; //debug
 
-    $salt="pedro123david";
-    $passw=md5($_POST["password"], $salt);
-    //echo $passw; //debug
-    $sql_r="select pass from utilizador where username= '$name'";
+    //$salt="pedro123david";
+    $passw=md5($_POST["password"]);
+    //echo $passw; debug
+    $sql_r="select password from users where username= '$name'";
     $sql_pw= mysqli_query($ligacao, $sql_r);
     $pw= mysqli_fetch_assoc($sql_pw);
      
-    $pwi=md5($pw['password'], $salt);
     //compara a pw que o utilizador com a que esta guardada na bd
     //se for verdadeiro vai buscar os dados a bd sobre esse utilizador e gurdados na session onde vao ser usados no dados.php
-    if($pwi == $passw){
-      $sel_sql="select username, email from utilizador where username= '$name'";
+    if($pw["password"] == $passw){
+      $sel_sql="select username,email,id from users where username= '$name'";
       $info= mysqli_query($ligacao, $sel_sql);
       $data= mysqli_fetch_assoc($info);
-        
+
       $_SESSION["username"]=$data['username'];
-      $_SESSION["mail"]=$data['email'];
+      $_SESSION["email"]=$data['email'];
+	  $_SESSION["id"]=$data['id'];
       //echo "aaaaaaaaaaaaaaahhh"; //debug
-      header("Location: dados.php");
+
+      header("Location: login/user_profile.php");
 
     }else{
 ?>
@@ -116,12 +119,12 @@
             <h5 class="card-title text-center">Sign In</h5>
             <form class="form-signin" method="post">
               <div class="form-label-group">
-                <input type="text" value="david" id="inputUsername" name="username" class="form-control" placeholder="Username" required autofocus>
+                <input type="text" id="inputUsername" name="username" class="form-control" placeholder="Username" required autofocus>
                 <label for="inputUsername">Username</label>
               </div>
 
               <div class="form-label-group">
-                <input type="password" value="admin" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
+                <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
                 <label for="inputPassword">Password</label>
               </div>
 
