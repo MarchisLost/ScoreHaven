@@ -110,8 +110,8 @@
 	    	      </li>
 	    	    </ul>
 	    	    	<div>
-	    		    	<a class="btn btn-outline-secondary" href="creat_acc" role="button">Create Account</a>
-	    		    	<a class="btn btn-outline-success" href="login" role="button">LOGIN</a>
+	    		    	<a class="btn btn-outline-secondary" href="sign_up.php" role="button">Create Account</a>
+	    		    	<a class="btn btn-outline-success" href="sign_in.php" role="button">LOGIN</a>
 	    		    </div>
 	    	  </div>
 	    </div>

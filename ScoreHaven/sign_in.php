@@ -53,8 +53,6 @@
 <!-- Confirmação dos dados inseridos pelo utilizador -->
 <?php
 
- // header("Content-Type: text/html; charset=ISO 8859-1",true);esta a dar o mesmo erro do session start, dunno why
-
   header("Content-Type: text/html; charset=ISO 8859-1",true);
 
   include 'conecta_bd.php';
@@ -63,7 +61,7 @@
 
     session_start();
 
-    $name= $_POST["username"]; //receber os dados que o utilizador escreveu
+    $name= $_POST["username"]; //recebe os dados que o utilizador escreveu
 
     /*//codigo pra ir buscar o salt a bd
     $sql_salt="select salt from encript";                 
@@ -111,7 +109,6 @@
     }
   }
 ?>  
-
   <div class="container">
     <div class="row">
       <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
