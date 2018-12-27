@@ -71,83 +71,89 @@
     }
     </script>
 
-<!-- Navigation bar -->
-	<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-		<div class="container-fluid">
-	    	  <a id="logo_navbar_text_type" class="navbar-brand" href="index">
-	    	  		<img src="img/sitelogo.svg" width="35" height="35" class="d-inline-block align-top" alt="">
-	        		Score<span id="logo_text_color">Haven</span>
-	    	  </a>
-	    	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-	    	    <span class="navbar-toggler-icon"></span>
-	    	  </button>
-	    
-	    	  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-	    	    <ul class="navbar-nav mr-auto">
-	    	      <li class="nav-item">
-	    	        <a class="nav-link" href="index">Soccer</a>
-	    	      </li>
-	    	      <li class="nav-item active">
-	    	        <a class="nav-link" href="basketball">Basketball<span class="sr-only">(current)</span></a>
-	    	      </li>
-	    	      <li class="nav-item">
-	    	        <a class="nav-link" href="volleyball">Volleyball</a>
-	    	      </li>
-	    	      <li class="nav-item">
-	    	        <a class="nav-link" href="hockey">Hockey</a>
-	    	      </li>
-	    	      <li class="nav-item dropdown">
-	    	        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-	    	          Other
-	    	        </a>
-	    	        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-	    	          <a class="dropdown-item" href="amfootball">AM.Football</a>
-	    	          <a class="dropdown-item" href="tennis">Tennis</a>
-	    	          <a class="dropdown-item" href="cricket">Cricket</a>
-	    	          <div class="dropdown-divider"></div>
-	    	          <a class="dropdown-item" href="iphone">Iphone</a>
-	    	      </li>
-	    	    </ul>
-	    	    	<ul class="navbar-nav ml-auto">
-			          <li class="nav-item dropdown show">
-			            <a class="nav-link dropdown-toggle waves-effect waves-light" id="navbarDropdownMenuLink-4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-			              <i class="fa fa-user"></i> My Profile </a>
-			            <div class="dropdown-menu dropdown-menu-right dropdown-info show" aria-labelledby="navbarDropdownMenuLink-4">
-			              <a class="dropdown-item waves-effect waves-light" href="#">My account</a>
-			              <a class="dropdown-item waves-effect waves-light" href="#">Settings</a>
-			              <a class="dropdown-item waves-effect waves-light" href="#">Log out</a>
-			            </div>
-			          </li>
-			        </ul>
-	    	  </div>
+	<div id="container">
+	<!-- Navigation bar -->
+		<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+			<div class="container-fluid">
+		    	  <a id="logo_navbar_text_type" class="navbar-brand" href="index">
+		    	  		<img src="img/sitelogo.svg" width="35" height="35" class="d-inline-block align-top" alt="">
+		        		Score<span id="logo_text_color">Haven</span>
+		    	  </a>
+		    	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+		    	    <span class="navbar-toggler-icon"></span>
+		    	  </button>	    
+		    	<div class="collapse navbar-collapse" id="navbarSupportedContent">
+		    	    <ul class="navbar-nav mr-auto">
+		    	      <li class="nav-item">
+	    	        	<a class="nav-link" href="index">Soccer</a>
+		    	      </li>
+		    	      <li class="nav-item active">
+		    	        <a class="nav-link" href="basketball">Basketball<span class="sr-only">(current)</span></a>
+		    	      </li>
+		    	      <li class="nav-item">
+		    	        <a class="nav-link" href="volleyball">Volleyball</a>
+		    	      </li>
+		    	      <li class="nav-item">
+		    	        <a class="nav-link" href="hockey">Hockey</a>
+		    	      </li>
+		    	      <li class="nav-item dropdown">
+		    	        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		    	          Other
+		    	        </a>
+		    	        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+		    	          <a class="dropdown-item" href="amfootball">AM.Football</a>
+		    	          <a class="dropdown-item" href="tennis">Tennis</a>
+		    	          <a class="dropdown-item" href="cricket">Cricket</a>
+		    	          <div class="dropdown-divider"></div>
+		    	          <a class="dropdown-item" href="iphone">Iphone</a>
+		    	      </li>
+		    	    </ul>
+		    	    	<div class="collapse navbar-collapse" id="navbarSupportedContent-4">
+					        <ul class="navbar-nav ml-auto">
+					          <li class="nav-item dropdown show">
+					            <a class="nav-link dropdown-toggle waves-effect waves-light" id="navbarDropdownMenuLink-4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+					              <i class="fa fa-user"></i> My Profile </a>
+					            <div class="dropdown-menu dropdown-menu-right dropdown-info" aria-labelledby="navbarDropdownMenuLink-4">
+					              <a class="dropdown-item waves-effect waves-light" href="#">My account</a>
+					              <a class="dropdown-item waves-effect waves-light" href="#">Log out</a>
+					            </div>
+					          </li>
+					        </ul>
+	      				</div>
+		    	</div>
+		    </div>
+		</nav>
+	<!-- End of Navigation Bar -->
+
+	<!-- Center -->
+		<div id="body">
+	        <div class="row">	
+	        	<div class="col-lg-3"></div>	
+	          	<div class="col-lg-6" id="api">
+	            	<?php if(strpos($con = ini_get("disable_functions"), "fsockopen") === false) {if(is_resource($fs = fsockopen("www.livescore.in", 80, $errno, $errstr, 3)) && !($stop = $write = !fwrite($fs, "GET //free/lsapi HTTP/1.1\r\nHost: www.livescore.in\r\nConnection: Close\r\nlsfid: 239524\r\n\r\n"))) {$content = "";while (!$stop && !feof($fs)) {$line = fgets($fs, 128);($write || $write = $line == "\r\n") && ($content .= $line);}fclose($fs);$c = explode("\n", $content);foreach($c as &$r) {$r = preg_replace("/^[0-9A-Fa-f]+\r/", "", $r);}$content = implode("", $c);} else $content .= $errstr."(".$errno.")<br />\n";} elseif(strpos($con, "file_get_contents") === false && ini_get("allow_url_fopen")) {$content = file_get_contents("https://www.livescore.in/free/lsapi", false, stream_context_create(array("http" => array("timeout" => 3, "header" => "lsfid: 239524 "))));} elseif(extension_loaded("curl") && strpos($con, "curl_") === false) {curl_setopt_array($curl = curl_init("https://www.livescore.in/free/lsapi"), array(CURLOPT_RETURNTRANSFER => true, CURLOPT_HTTPHEADER => array("lsfid: 239524 ")));$content = curl_exec($curl);curl_close($curl);} else {$content = "PHP inScore cannot be loaded. Ask your web hosting provider to allow `file_get_contents` function along with `allow_url_fopen` directive or `fsockopen` function.";}echo $content; ?>
+	          	</div>
+	          	<div class="col-lg-3">
+	          		<iframe frameborder="0"
+	                	scrolling="no"
+	                	id="chat_embed"
+	                	src="https://www.twitch.tv/embed/itachi_the_exile/chat"
+	                	height="500"
+	                	width="350">
+	            	</iframe>
+	          </div>	
+	        </div>
 	    </div>
-	</nav>
-<!-- End of Navigation Bar -->
+	<!-- End of Center -->
 
-<!-- Center -->
-	<section>
-      <div class="container">
-        <div class="row">	
-        	<div class="col-lg-3"></div>	
-          	<div class="col-lg-6" id="api">
-            	<?php if(strpos($con = ini_get("disable_functions"), "fsockopen") === false) {if(is_resource($fs = fsockopen("www.livescore.in", 80, $errno, $errstr, 3)) && !($stop = $write = !fwrite($fs, "GET //free/lsapi HTTP/1.1\r\nHost: www.livescore.in\r\nConnection: Close\r\nlsfid: 239524\r\n\r\n"))) {$content = "";while (!$stop && !feof($fs)) {$line = fgets($fs, 128);($write || $write = $line == "\r\n") && ($content .= $line);}fclose($fs);$c = explode("\n", $content);foreach($c as &$r) {$r = preg_replace("/^[0-9A-Fa-f]+\r/", "", $r);}$content = implode("", $c);} else $content .= $errstr."(".$errno.")<br />\n";} elseif(strpos($con, "file_get_contents") === false && ini_get("allow_url_fopen")) {$content = file_get_contents("https://www.livescore.in/free/lsapi", false, stream_context_create(array("http" => array("timeout" => 3, "header" => "lsfid: 239524 "))));} elseif(extension_loaded("curl") && strpos($con, "curl_") === false) {curl_setopt_array($curl = curl_init("https://www.livescore.in/free/lsapi"), array(CURLOPT_RETURNTRANSFER => true, CURLOPT_HTTPHEADER => array("lsfid: 239524 ")));$content = curl_exec($curl);curl_close($curl);} else {$content = "PHP inScore cannot be loaded. Ask your web hosting provider to allow `file_get_contents` function along with `allow_url_fopen` directive or `fsockopen` function.";}echo $content; ?>
-          </div>
-          <div class="col-lg-3"></div>	
-        </div>
-      </div>
-    </section>
-<!-- End of Center -->
-
-<!-- Footer -->
-    <footer class="bg-dark">
-      <div class="container">
-      	<br>
-        <p  id="company" class="m-0 text-center text-white">Copyright &copy; ScoreHaven 2018</p>
-        <p id="contributor" class="m-0 text-center text-gray">Livescore service provided by: <a href="http://www.livescore.in/" title="Livescore.in" target="_blank">Livescore.in</a></p>
-        <br>
-      </div>
-    </footer>
-<!-- End of Footer -->
+	<!-- Footer -->
+	    <div id="footer" class="bg-dark">
+	      	<br>
+	        <p  id="company" class="m-0 text-center text-white">Copyright &copy; ScoreHaven 2018</p>
+	        <p id="contributor" class="m-0 text-center text-gray">Livescore service provided by: <a href="http://www.livescore.in/" title="Livescore.in" target="_blank">Livescore.in</a></p>
+	        <br>
+	    </div>
+	<!-- End of Footer -->
+	</div>
 
 </body>
 </html>

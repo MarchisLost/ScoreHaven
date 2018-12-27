@@ -2,26 +2,10 @@
 
 html, 
 body{ 
-    height:100%; 
     margin:0;
+    padding:0;
+    height:100%;
 }
-
-footer{ 
-    height:auto;
-}
-
-/* Trick to make the footer stick to the bottom while not overlaping any content */
-body{
-    display:flex; 
-    flex-direction:column;
-}
-
-footer{
-    margin-top:auto; 
-    bottom:0;
-}
-
-/* End of Trick */
 
 body {
     background: url(../img/stadium.png) no-repeat center center fixed; 
@@ -29,7 +13,11 @@ body {
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
-    padding-top: 63px;
+    padding-top: 55px;
+}
+
+.row{
+    width:100%;
 }
 
 #logo_navbar_text_type {
@@ -42,6 +30,22 @@ body {
 
 #api {
     padding-left: 0px;
+}
+
+#container {
+   min-height:100%;
+   position:relative;
+}
+
+#body {
+   padding:10px;
+   padding-bottom:auto;   /* Height of the footer */
+}
+#footer {
+   position:absolute;
+   bottom:0;
+   width:100%;
+   height:auto;/* Height of the footer */
 }
 
 #contributor {
@@ -71,7 +75,7 @@ body {
 /*End of back to top button configuration */
 
 @media only screen and (max-width: 960px) {
-    footer{
+    #footer{
         width:624px;
     }
     body{
@@ -80,7 +84,7 @@ body {
 }
 
 @media (min-width: 500px) and (max-width: 1024px) and (orientation: landscape) {
-    footer{
+    #footer{
         width:704px;
     }
     body{
@@ -89,7 +93,7 @@ body {
 }
 
 @media (min-width: 768px) and (max-width: 1024px) {
-  footer{
+    #footer{
     width:800px; 
-  }
+    }
 }

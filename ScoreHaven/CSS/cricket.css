@@ -47,6 +47,10 @@ body {
    height:80px;   /* Height of the footer */
 }
 
+#contributor {
+    font-size: 15px;
+}
+
 /*Back to top button configuration */
 #backtotop {
   display: none;
