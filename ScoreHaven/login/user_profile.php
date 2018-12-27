@@ -110,12 +110,12 @@
                     <div class="col-md-6">
                         <div class="profile-head">
                                     <h5>
-                                    	<?php echo $_SESSION["username"];?>´s Profile
+                                    	<?php echo $_SESSION["username"];?>ï¿½s Profile
                                     </h5>
                                     <h6>
                                         <?php echo $_SESSION["email"];?>
                                     </h6>
-                                    <p class="proile-rating">Member since : <span>Data (Ir buscar a bd)</span></p>
+                                    <p class="proile-rating">Member since : <span><?php echo $_SESSION["data_insc"];?></span></p>
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
                                 <li class="nav-item">
                                     <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>

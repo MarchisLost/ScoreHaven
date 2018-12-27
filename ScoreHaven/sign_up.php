@@ -8,6 +8,7 @@
 
         session_start();
         
+        //informações introduzidas pelo utilizador
         $username = $_POST["username"];
         $email = $_POST["email"];
         $password = $_POST["password"];
@@ -48,29 +49,37 @@
               </div>
             </div>
 <?php
-          }
-          elseif(mysqli_num_rows($select_u)) {
+          }elseif(mysqli_num_rows($select_u)) {
 ?>
-              <div class="container">
-                <div class="alert alert-warning">
-                  <strong>Warning!</strong> Username already exists!
-                </div>
+            <div class="container">
+              <div class="alert alert-warning">
+                <strong>Warning!</strong> Username already exists!
               </div>
+            </div>
 <?php    
           }
           else{
-            // create user
+            $sql="select max(id_u) as max_id_u from utilizador";
+            $res=$ligacao -> query($sql);
+            $linha = $res -> fetch_assoc();
+            if($res -> num_rows > 0){
+              $prox_id_u=$linha['max_id_u']+1;
+            }else{
+              $prox_id_u='1';
+            }
             $password = md5($password); //hash password before storing for security purposes
-            $sql = "INSERT INTO users(username, email, password) VALUES('$username', '$email', '$password')";
-            mysqli_query($ligacao, $sql);
-            header("location: success.php"); //redirect to success page  
-          }
-
+            $insert = "INSERT INTO utilizador (id_u, username, email, data_insc, pass, id_d, id_l, id_e) VALUES (NULL, '$username', '$email', NULL, '$password', NULL, NULL, NULL )";      
+            if (mysqli_query($ligacao, $insert)) {
+              header("location: success.php");
+            } else {
+              echo "Error: " . $insert . "<br>" . mysqli_error($ligacao);
+            }        
+          } 
         }else{
 ?>
           <div class="container">
             <div class="alert alert-warning">
-              <strong>Warning!</strong> The 2 passwords must be equal
+              <strong>Warning!</strong> The 2 passwords must be equal!
             </div>
           </div>
 <?php
