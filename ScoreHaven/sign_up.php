@@ -111,14 +111,6 @@
 <?php    
           }
           else{
-            $sql="select max(id_u) as max_id_u from utilizador";
-            $res=$ligacao -> query($sql);
-            $linha = $res -> fetch_assoc();
-            if($res -> num_rows > 0){
-              $prox_id_u=$linha['max_id_u']+1;
-            }else{
-              $prox_id_u='1';
-            }
             $password = md5($password); //hash password before storing for security purposes
             $insert = "INSERT INTO utilizador (id_u, username, email, data_insc, pass, id_d, id_l, id_e) VALUES (NULL, '$username', '$email', NULL, '$password', NULL, NULL, NULL )";      
             if (mysqli_query($ligacao, $insert)) {
