@@ -14,27 +14,27 @@
   </head>
   <body>
 
-<?php
-  header("Content-Type: text/html; charset=ISO 8859-1",true);
-
-  session_start();
-
-  include 'conecta_bd.php';  
-?>
-    <table> 
+  <table> <!-- class="table table-hover"  ao meter isto a tabela expande se horizontalmente-->
       <thead> 
         <tr>
-          <th scope="col">Username</th>
+          <th scope="col">Nome</th>
+          <th scope="col">Email</th>
         </tr>
       </thead>
+<?php
+      header("Content-Type: text/html; charset=ISO 8859-1",true);
 
+      session_start();
+      include 'conecta_bd.php';       
+?>
       <form method="post" action="logoff.php">
         <tbody>
           <tr>
             <td><?php echo $_SESSION["username"];?></td>                      
+            <td><?php echo $_SESSION["mail"];?></td>
           </tr>
         </tbody> 
-         <button id="logoff" type="submit" class="btn btn-success" >Log Off</button>
+        <button type="submit" >Log Off</button>
       </form>
 <?php 
           $ligacao -> close();

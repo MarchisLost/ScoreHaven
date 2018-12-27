@@ -81,13 +81,14 @@
     //compara a pw que o utilizador com a que esta guardada na bd
     //se for verdadeiro vai buscar os dados a bd sobre esse utilizador e gurdados na session onde vao ser usados no dados.php
     if($pw["password"] == $passw){
-      $sel_sql="select username,email,id from users where username= '$name'";
+      $sel_sql="select username,email,id_u, data_insc from users where username= '$name'";
       $info= mysqli_query($ligacao, $sel_sql);
       $data= mysqli_fetch_assoc($info);
 
       $_SESSION["username"]=$data['username'];
       $_SESSION["email"]=$data['email'];
-	  $_SESSION["id"]=$data['id'];
+      $_SESSION["id"]=$data['id'];
+      $_SESSION["data_insc"]=$data['data_insc'];
       //echo "aaaaaaaaaaaaaaahhh"; //debug
 
       header("Location: login/user_profile.php");

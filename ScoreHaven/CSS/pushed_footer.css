@@ -6,17 +6,17 @@ html, body {
    height:100%;
 }
 
-body{
-   background: url(../img/volleyball.png) no-repeat center center fixed; 
-   -webkit-background-size: cover;
-   -moz-background-size: cover;
-   -o-background-size: cover;
-   background-size: cover;
-   padding-top: 55px;
+body {
+    background: url(../img/stadium.png) no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    padding-top: 55px;
 }
 
-.row {
-   width: 100%;
+.row{
+    width:100%;
 }
 
 #logo_navbar_text_type {
@@ -70,7 +70,7 @@ body{
 /*End of back to top button configuration */
 
 @media only screen and (max-width: 960px) {
-    footer{
+    #footer{
         width:624px;
     }
     body{
@@ -79,16 +79,16 @@ body{
 }
 
 @media (min-width: 500px) and (max-width: 1024px) and (orientation: landscape) {
-    footer{
+    #footer{
         width:704px;
     }
     body{
-        background: url(../img/volleyball.png) no-repeat center center fixed;
+        background: url(../img/stadium.png) no-repeat center center fixed;
     }
 }
 
 @media (min-width: 768px) and (max-width: 1024px) {
-  footer{
+    #footer{
     width:800px; 
-  }
+    }
 }

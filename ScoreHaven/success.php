@@ -1,8 +1,3 @@
-<?php
-
-	header("Content-Type: text/html; charset=ISO 8859-1",true);
-	
-?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,11 +21,12 @@
 		<p class="lead"><strong>Please check your email</strong> to activate your account</p>
 		<hr>
 		<p>
-			You will now be redirected to our Login page(Click the button below if it doesn´t redirect you automatically)
+			You will now be redirected to our Login page(Click the button below if it doesn't redirect you automatically)
 		</p>
 		<p class="lead">
 		<a class="btn btn-primary btn-sm" href="sign_in.php" role="button">Continue to Login</a>
 		</p>
 	</div>
+
 </body>
 </html>
