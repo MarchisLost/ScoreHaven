@@ -20,7 +20,7 @@
 </head>
 <body>
 
-<h1>Alert Buttons</h1>
+<h1>Alert Buttons</h1> 
 
 <button onclick= "go()" class="btn success">Success</button>
 

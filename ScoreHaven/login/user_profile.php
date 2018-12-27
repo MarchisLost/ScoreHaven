@@ -8,14 +8,15 @@
     $user_id=$_SESSION["id"];
     $user_username=$_SESSION["username"];
     $user_email=$_SESSION["email"];
+    $user_data_insc=$_SESSION['data_insc'];
 
-    $sql_sport="select sport.sport_name from sport inner join users on sport.id_sport = users.fav_s where users.id='$user_id'";
+    $sql_sport="select desporto.nome_d from desporto inner join users on desporto.id_d = users.id_d where users.id_u='$user_id'";
     $execute_sport = mysqli_query($ligacao, $sql_sport);
 
-    $sql_league="select league.league_name from league inner join users on league.id_league = users.fav_l where users.id=$user_id";
+    $sql_league="select liga.nome_l from liga inner join users on liga.id_l = users.id_l where users.id_u=$user_id";
     $execute_league = mysqli_query($ligacao, $sql_league);
 
-    $sql_team="select team.team_name from team inner join users on team.id_team = users.fav_t where users.id=$user_id";
+    $sql_team="select equipa.nome_e from equipa inner join users on equipa.id_e = users.id_e where users.id_u=$user_id";
     $execute_team = mysqli_query($ligacao, $sql_team);
 
     if (isset($_POST['change_username_save_btn'])) {
@@ -56,7 +57,7 @@
     if (isset($_POST['change_email_save_btn'])) {
     	$new_email = $_POST["new_email"];
 
-		function match($allowed_d, $new_email) //criaçao da funçao para verificar se o email e valido
+		function match($allowed_d, $new_email) //criaï¿½ao da funï¿½ao para verificar se o email e valido
 		{
 			foreach($allowed_d as $allowed){
 				if (strpos($new_email, $allowed) !== false) {
@@ -68,7 +69,7 @@
 
     	$allowed_d = array('@gmail.com', '@outlook.com', '@outlook.pt');
 
-		if(!match($allowed_d, $new_email)){ //verifica se existe algum dos endereçoes de email validos no email escrito pelo utilizador, caso
+		if(!match($allowed_d, $new_email)){ //verifica se existe algum dos endereï¿½oes de email validos no email escrito pelo utilizador, caso
 	        	//nao exista, e mostrado o aviso abaixo
 ?>
 	        <div class="container">
@@ -169,6 +170,14 @@
 </head>
 <body>
 
+<!--funÃ§Ã£o pra ir pra pag que gera o pdf, implmentado na class="col-md-2"-->
+<script>
+function go() {
+  window.location.href="cpdf.php";
+}
+</script>
+
+
 <!-- Navigation bar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
         <div class="container-fluid">
@@ -239,12 +248,12 @@
                     <div class="col-md-6">
                         <div class="profile-head">
                                     <h5>
-                                    	<?php echo $_SESSION["username"];?>´s Profile
+                                    	<?php echo $_SESSION["username"];?>'s Profile
                                     </h5>
                                     <h6>
                                         <?php echo $_SESSION["email"];?>
                                     </h6>
-                                    <p class="proile-rating">Member since : <span>Data (Ir buscar a bd)</span></p>
+                                    <p class="proile-rating"> <span> Member since : <?php echo $_SESSION["data_insc"];?> </span></p>
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
                                 <li class="nav-item">
                                     <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
@@ -256,7 +265,7 @@
                         </div>
                     </div>
                     <div class="col-md-2">
-                        <input type="submit" class="profile-edit-btn" name="btnAddMore" value="PDF"/> <!-- Botao PDF -->
+                        <input type="submit" class="profile-edit-btn" name="btnAddMore" onclick= "go()" value="PDF"/> <!-- Botao PDF -->
                     </div>
                 </div>
                 <div class="row">

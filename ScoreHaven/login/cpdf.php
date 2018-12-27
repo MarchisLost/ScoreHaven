@@ -1,10 +1,11 @@
 <?php
 require 'fpdf181\fpdf.php';
-include 'conecta_bd.php';
+include '..\conecta_bd.php';
 
 //A4 width : 219mm
 //default margin : 10mm each side
 //writable horizontal : 219-(10*2)=189mm
+ob_start();
 
 $pdf = new FPDF('P','mm','A4');
 $pdf->AddPage();
@@ -117,26 +118,6 @@ $pdf->Cell(94.5,5,'Ir bd',1,1,'L',1);//end line
 $pdf->Cell(94.5,5,'ir buscar bd',1,0,'L',0);
 $pdf->Cell(94.5,5,'Ir bd',1,1,'L',0);//end line
 
-$pdf->Ln(15);//break entre tabelas
-
-
-/*$fundo = false;
-session_start();
-$sql_id_questionario=$_SESSION['id_questionario'];
-$sql_select="SELECT * FROM resposta
-LEFT JOIN pergunta
-ON id_p = id_pergunta WHERE nr_questionario = '$sql_id_questionario'";
-$res = $ligacao->query($sql_select);
-$pdf->SetFont('Arial','',10);
-while ($registo=$res->fetch_assoc()){
-	$pdf->SetFillColor(255, 128, 192);
-
-	//Cell ( width, height, text, border, end line, [align], fill, link)
-	$pdf->Cell(47.25,5,$registo['id_r'],1,0,'C',$fundo);
-	$pdf->Cell(47.25,5,$registo['questao'],1,0,'C',$fundo);
-	$pdf->Cell(47.25,5,$registo['resposta'],1,0,'C',$fundo);
-	$pdf->Cell(47.25,5,$registo['nr_questionario'],1,1,'C',$fundo);//End Line
-	$fundo = !$fundo;
-}*/
 $pdf-> Output();
+ob_end_flush();
 ?>
