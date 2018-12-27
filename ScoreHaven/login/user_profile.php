@@ -57,7 +57,7 @@
                     <a class="nav-link" href="index">Soccer</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="basketball">Basketball</a>
+                    <a class="nav-link" href="basketball.php">Basketball</a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" href="volleyball">Volleyball</a>
@@ -111,12 +111,12 @@
                     <div class="col-md-6">
                         <div class="profile-head">
                                     <h5>
-                                    	<?php echo $_SESSION["username"];?>´s Profile
+                                    	<?php echo $_SESSION["username"];?>'s Profile
                                     </h5>
                                     <h6>
                                         <?php echo $_SESSION["email"];?>
                                     </h6>
-                                    <p class="proile-rating">Member since : <span>Data (Ir buscar a bd)</span></p>
+                                    <p class="proile-rating">Member since : <span><?php echo $_SESSION["data_insc"];?></span></p>
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
                                 <li class="nav-item">
                                     <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
@@ -146,132 +146,132 @@
                     <div class="col-md-8">
                         <div class="tab-content profile-tab" id="myTabContent">
                             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Username</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p><?php echo $_SESSION["username"];?></p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Email</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p><?php echo $_SESSION["email"];?></p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Favourite Sport</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p>    
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Username</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p><?php echo $_SESSION["username"];?></p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Email</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p><?php echo $_SESSION["email"];?></p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Favourite Sport</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>    
 <?php
-                                                    if ($execute_sport !== false) {
-                                                        while($linha = mysqli_fetch_array($execute_sport)){
-                                                            $sql_sport = $linha['sport_name'];
+                                            if ($execute_sport !== false) {
+                                                while($linha = mysqli_fetch_array($execute_sport)){
+                                                    $sql_sport = $linha['sport_name'];
 
-                                                            echo $sql_sport;
-                                                        }
-                                                    }else {
-                                                        echo 'Choose one on the settings tab';
-                                                    }
+                                                    echo $sql_sport;
+                                                }
+                                            }else {
+                                                echo 'Choose one on the settings tab';
+                                            }
 ?>
-                                                </p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Favourite Team</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Favourite Team</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>
 <?php
-                                                    if ($execute_team !== false) {
-                                                        while($linha = mysqli_fetch_array($execute_team)){
-                                                            $sql_team = $linha['team_name'];
+                                            if ($execute_team !== false) {
+                                                while($linha = mysqli_fetch_array($execute_team)){
+                                                    $sql_team = $linha['team_name'];
 
-                                                            echo $sql_team;
-                                                        }
-                                                    }else {
-                                                        echo 'Choose one on the settings tab';
-                                                    }
+                                                    echo $sql_team;
+                                                }
+                                            }else {
+                                                echo 'Choose one on the settings tab';
+                                            }
 ?>
-                                                </p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Favourite Player</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Favourite Player</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>
 <?php
-                                                    if ($execute_player !== false) {
-                                                        while($linha = mysqli_fetch_array($execute_player)){
-                                                            $sql_player = $linha['player_name'];
+                                            if ($execute_player !== false) {
+                                                while($linha = mysqli_fetch_array($execute_player)){
+                                                    $sql_player = $linha['player_name'];
 
-                                                            echo $sql_player;
-                                                        }
-                                                    }else {
-                                                        echo 'Choose one on the settings tab';
-                                                    }
+                                                    echo $sql_player;
+                                                }
+                                            }else {
+                                                echo 'Choose one on the settings tab';
+                                            }
 ?>
-                                                </p>
-                                            </div>
-                                        </div>
+                                        </p>
+                                    </div>
+                                </div>
                             </div>
                             <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Change Username</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p>Caixa de texto para atualizar o campo na bd</p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Change Password</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p>Caixa de texto para atualizar o campo na bd</p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Change Email</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p>Caixa de texto para atualizar o campo na bd</p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Change Favorite Sport</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p>Caixa de texto para atualizar o campo na bd</p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Change Favorite Team</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p>Caixa de texto para atualizar o campo na bd</p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Change Favorite Player</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p>Caixa de texto para atualizar o campo na bd</p>
-                                            </div>
-                                        </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Change Username</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>Caixa de texto para atualizar o campo na bd</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Change Password</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>Caixa de texto para atualizar o campo na bd</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Change Email</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>Caixa de texto para atualizar o campo na bd</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Change Favorite Sport</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>Caixa de texto para atualizar o campo na bd</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Change Favorite Team</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>Caixa de texto para atualizar o campo na bd</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Change Favorite Player</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>Caixa de texto para atualizar o campo na bd</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

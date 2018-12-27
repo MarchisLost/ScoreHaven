@@ -1,6 +1,6 @@
 <?php
 require 'fpdf181\fpdf.php';
-//include 'conecta_bd.php';
+include 'conecta_bd.php';
 
 //A4 width : 219mm
 //default margin : 10mm each side
@@ -24,27 +24,41 @@ $pdf->Cell(130,6,'Resuls',0,1,'L');//End line
 //Ln -> Line break (height), By default, the value equals the height of the last printed cell.
 $pdf->Ln(12);
 
+session_start();
+//variaveis a receber de session do login do user
+$sql_username=$_SESSION["username"];
+$sql_email=$_SESSION["email"];
+$sql_date=$_SESSION["data_insc"];
+
+//Buscar os nomes dos gostos do user
+$sql_select2="SELECT desporto.nome_d, liga.nome_l, equipa.nome_e FROM users
+INNER JOIN desporto on users.id_d= desporto.id_d
+INNER JOIN liga on users.id_l= liga.id_l
+INNER JOIN equipa on users.id_e= equipa.id_e
+WHERE users.username='$sql_username'";
+$res_favs = $ligacao->query($sql_select2);
+$dados=$res_favs -> fetch_assoc();
+
 $pdf->SetFont('Arial','B',10);
 //Table1 user Title
 //Cell ( width, height, text, border, end line, [align], fill, link)
 $pdf->SetFillColor(255, 0, 128);
 $pdf->Cell(189,5,'User Information',1,1,'C',1);
 
-$fundo = false; //variavel ira mudar a cor das linhas
 //table
 $pdf->SetFillColor(255, 204, 230);
 $pdf->Cell(94.5,5,'Username',1,0,'L',1);
-$pdf->Cell(94.5,5,'ir buscar bd',1,1,'L',1);//end line
-$pdf->Cell(94.5,5,'Email',1,0,'L',1);
-$pdf->Cell(94.5,5,'ir buscar bd',1,1,'L',1);//end line
+$pdf->Cell(94.5,5,$sql_username,1,1,'L',1);//end line
+$pdf->Cell(94.5,5,'Email',1,0,'L',0);
+$pdf->Cell(94.5,5,$sql_email,1,1,'L',0);//end line
 $pdf->Cell(94.5,5,'Date of Registration',1,0,'L',1);
-$pdf->Cell(94.5,5,'ir buscar bd',1,1,'L',1);//end line
-$pdf->Cell(94.5,5,'Favorite Sport',1,0,'L',1);
-$pdf->Cell(94.5,5,'ir buscar bd',1,1,'L',1);//end line
+$pdf->Cell(94.5,5,$sql_date,1,1,'L',1);//end line
+$pdf->Cell(94.5,5,'Favorite Sport',1,0,'L',0);
+$pdf->Cell(94.5,5,$dados['nome_d'],1,1,'L',0);//end line
 $pdf->Cell(94.5,5,'Favourite League',1,0,'L',1);
-$pdf->Cell(94.5,5,'ir buscar bd',1,1,'L',1);//end line
-$pdf->Cell(94.5,5,'Favorite Team',1,0,'L',1);
-$pdf->Cell(94.5,5,'ir buscar bd',1,1,'L',1);//end line
+$pdf->Cell(94.5,5,$dados['nome_l'],1,1,'L',1);//end line
+$pdf->Cell(94.5,5,'Favorite Team',1,0,'L',0);
+$pdf->Cell(94.5,5,$dados['nome_e'],1,1,'L',0);//end line
 
 $pdf->Ln(15);//break entre tabelas
 
@@ -58,12 +72,12 @@ $pdf->Cell(189,5,'Sport Results',1,1,'C',1);
 $pdf->SetFillColor(255, 204, 230);
 $pdf->Cell(94.5,5,'No Likes',1,0,'L',1);
 $pdf->Cell(94.5,5,'Sport Name',1,1,'L',1);//end line
+$pdf->Cell(94.5,5,'ir buscar bd',1,0,'L',0);
+$pdf->Cell(94.5,5,'Ir bd',1,1,'L',0);//end line
 $pdf->Cell(94.5,5,'ir buscar bd',1,0,'L',1);
 $pdf->Cell(94.5,5,'Ir bd',1,1,'L',1);//end line
-$pdf->Cell(94.5,5,'ir buscar bd',1,0,'L',1);
-$pdf->Cell(94.5,5,'Ir bd',1,1,'L',1);//end line
-$pdf->Cell(94.5,5,'ir buscar bd',1,0,'L',1);
-$pdf->Cell(94.5,5,'Ir bd',1,1,'L',1);//end line
+$pdf->Cell(94.5,5,'ir buscar bd',1,0,'L',0);
+$pdf->Cell(94.5,5,'Ir bd',1,1,'L',0);//end line
 
 $pdf->Ln(15);//break entre tabelas
 
@@ -77,12 +91,12 @@ $pdf->Cell(189,5,'League Results',1,1,'C',1);
 $pdf->SetFillColor(255, 204, 230);
 $pdf->Cell(94.5,5,'No Likes',1,0,'L',1);
 $pdf->Cell(94.5,5,'League Name',1,1,'L',1);//end line
+$pdf->Cell(94.5,5,'ir buscar bd',1,0,'L',0);
+$pdf->Cell(94.5,5,'Ir bd',1,1,'L',0);//end line
 $pdf->Cell(94.5,5,'ir buscar bd',1,0,'L',1);
 $pdf->Cell(94.5,5,'Ir bd',1,1,'L',1);//end line
-$pdf->Cell(94.5,5,'ir buscar bd',1,0,'L',1);
-$pdf->Cell(94.5,5,'Ir bd',1,1,'L',1);//end line
-$pdf->Cell(94.5,5,'ir buscar bd',1,0,'L',1);
-$pdf->Cell(94.5,5,'Ir bd',1,1,'L',1);//end line
+$pdf->Cell(94.5,5,'ir buscar bd',1,0,'L',0);
+$pdf->Cell(94.5,5,'Ir bd',1,1,'L',0);//end line
 
 $pdf->Ln(15);//break entre tabelas
 
@@ -96,12 +110,12 @@ $pdf->Cell(189,5,'Team Results',1,1,'C',1);
 $pdf->SetFillColor(255, 204, 230);
 $pdf->Cell(94.5,5,'No Likes',1,0,'L',1);
 $pdf->Cell(94.5,5,'Team Name',1,1,'L',1);//end line
+$pdf->Cell(94.5,5,'ir buscar bd',1,0,'L',0);
+$pdf->Cell(94.5,5,'Ir bd',1,1,'L',0);//end line
 $pdf->Cell(94.5,5,'ir buscar bd',1,0,'L',1);
 $pdf->Cell(94.5,5,'Ir bd',1,1,'L',1);//end line
-$pdf->Cell(94.5,5,'ir buscar bd',1,0,'L',1);
-$pdf->Cell(94.5,5,'Ir bd',1,1,'L',1);//end line
-$pdf->Cell(94.5,5,'ir buscar bd',1,0,'L',1);
-$pdf->Cell(94.5,5,'Ir bd',1,1,'L',1);//end line
+$pdf->Cell(94.5,5,'ir buscar bd',1,0,'L',0);
+$pdf->Cell(94.5,5,'Ir bd',1,1,'L',0);//end line
 
 $pdf->Ln(15);//break entre tabelas
 
