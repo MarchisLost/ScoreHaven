@@ -49,7 +49,6 @@
 </head>
 <body>
     
-    
     <button onclick="topFunction()" id="backtotop" title="Go to top">Back to Top</button>
     
     <script>
@@ -71,6 +70,7 @@
     }
     </script>
 
+<div id="container">
 <!-- Navigation bar -->
 	<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
 		<div class="container-fluid">
@@ -118,29 +118,34 @@
 <!-- End of Navigation Bar -->
 
 <!-- Center -->
-	<section>
-      <div class="container">
+	<div id="body">
         <div class="row">	
         	<div class="col-lg-3"></div>	
           	<div class="col-lg-6" id="api">
             	<?php if(strpos($con = ini_get("disable_functions"), "fsockopen") === false) {if(is_resource($fs = fsockopen("www.livescore.in", 80, $errno, $errstr, 3)) && !($stop = $write = !fwrite($fs, "GET //free/lsapi HTTP/1.1\r\nHost: www.livescore.in\r\nConnection: Close\r\nlsfid: 239524\r\n\r\n"))) {$content = "";while (!$stop && !feof($fs)) {$line = fgets($fs, 128);($write || $write = $line == "\r\n") && ($content .= $line);}fclose($fs);$c = explode("\n", $content);foreach($c as &$r) {$r = preg_replace("/^[0-9A-Fa-f]+\r/", "", $r);}$content = implode("", $c);} else $content .= $errstr."(".$errno.")<br />\n";} elseif(strpos($con, "file_get_contents") === false && ini_get("allow_url_fopen")) {$content = file_get_contents("https://www.livescore.in/free/lsapi", false, stream_context_create(array("http" => array("timeout" => 3, "header" => "lsfid: 239524 "))));} elseif(extension_loaded("curl") && strpos($con, "curl_") === false) {curl_setopt_array($curl = curl_init("https://www.livescore.in/free/lsapi"), array(CURLOPT_RETURNTRANSFER => true, CURLOPT_HTTPHEADER => array("lsfid: 239524 ")));$content = curl_exec($curl);curl_close($curl);} else {$content = "PHP inScore cannot be loaded. Ask your web hosting provider to allow `file_get_contents` function along with `allow_url_fopen` directive or `fsockopen` function.";}echo $content; ?>
-          </div>
-          <div class="col-lg-3"></div>	
+            </div>
+            <div class="col-lg-3">
+            	<iframe frameborder="0"
+                	scrolling="no"
+                	id="chat_embed"
+                	src="https://www.twitch.tv/embed/itachi_the_exile/chat"
+                	height="500"
+                	width="350">
+            	</iframe>
+            </div>	
         </div>
-      </div>
-    </section>
+    </div>
 <!-- End of Center -->
 
 <!-- Footer -->
-    <footer class="bg-dark">
-      <div class="container">
+    <div id="footer" class="bg-dark">
       	<br>
         <p  id="company" class="m-0 text-center text-white">Copyright &copy; ScoreHaven 2018</p>
         <p id="contributor" class="m-0 text-center text-gray">Livescore service provided by: <a href="http://www.livescore.in/" title="Livescore.in" target="_blank">Livescore.in</a></p>
         <br>
-      </div>
-    </footer>
+    </div>
 <!-- End of Footer -->
+</div>
 
 </body>
 </html>
