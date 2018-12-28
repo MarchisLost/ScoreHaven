@@ -5,18 +5,20 @@
 
   	session_start();
 
-    $user_id=$_SESSION["id"];
+    //variveis vem do sign in por session  
+
     $user_username=$_SESSION["username"];
     $user_email=$_SESSION["email"];
+    $user_id=$_SESSION["id_u"];
     $user_data_insc=$_SESSION['data_insc'];
 
-    $sql_sport="select desporto.nome_d from desporto inner join users on desporto.id_d = users.id_d where users.id_u='$user_id'";
+    $sql_sport="SELECT desporto.nome_d from desporto left join users on desporto.id_d = users.id_d where users.id_u=$user_id";
     $execute_sport = mysqli_query($ligacao, $sql_sport);
 
-    $sql_league="select liga.nome_l from liga inner join users on liga.id_l = users.id_l where users.id_u=$user_id";
+    $sql_league="SELECT liga.nome_l from liga left join users on liga.id_l = users.id_l where users.id_u=$user_id";
     $execute_league = mysqli_query($ligacao, $sql_league);
 
-    $sql_team="select equipa.nome_e from equipa inner join users on equipa.id_e = users.id_e where users.id_u=$user_id";
+    $sql_team="SELECT equipa.nome_e from equipa left join users on equipa.id_e = users.id_e where users.id_u=$user_id";
     $execute_team = mysqli_query($ligacao, $sql_team);
 
     if (isset($_POST['change_username_save_btn'])) {
@@ -299,10 +301,8 @@ function go() {
                                                 <p>    
 <?php
                                                     if ($execute_sport !== false) {
-                                                        while($linha = mysqli_fetch_array($execute_sport)){
-                                                            $sql_sport = $linha['sport_name'];
-
-                                                            echo $sql_sport;
+                                                        while($linha = $execute_sport -> fetch_assoc()){
+                                                            echo $linha["nome_d"];
                                                         }
                                                     }else {
                                                         echo 'Choose one on the settings tab';
@@ -320,9 +320,7 @@ function go() {
 <?php
                                                     if ($execute_league !== false) {
                                                         while($linha = mysqli_fetch_array($execute_league)){
-                                                            $sql_league = $linha['league_name'];
-
-                                                            echo $sql_league;
+                                                            echo $linha['nome_l'];
                                                         }
                                                     }else {
                                                         echo 'Choose one on the settings tab';
@@ -333,16 +331,14 @@ function go() {
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <label>Favourite Player</label>
+                                                <label>Favourite Team</label>
                                             </div>
                                             <div class="col-md-6">
                                                 <p>
 <?php
                                                     if ($execute_team !== false) {
                                                         while($linha = mysqli_fetch_array($execute_team)){
-                                                            $sql_team = $linha['team_name'];
-
-                                                            echo $sql_team;
+                                                            echo $linha['nome_e'];
                                                         }
                                                     }else {
                                                         echo 'Choose one on the settings tab';

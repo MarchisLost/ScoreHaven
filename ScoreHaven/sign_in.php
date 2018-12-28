@@ -87,7 +87,7 @@
 
       $_SESSION["username"]=$data['username'];
       $_SESSION["email"]=$data['email'];
-      $_SESSION["id"]=$data['id'];
+      $_SESSION["id_u"]=$data['id_u'];
       $_SESSION["data_insc"]=$data['data_insc'];
       //echo "aaaaaaaaaaaaaaahhh"; //debug
 
