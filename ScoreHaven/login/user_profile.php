@@ -6,21 +6,25 @@
   	session_start();
 
     //variveis vem do sign in por session  
-
     $user_username=$_SESSION["username"];
     $user_email=$_SESSION["email"];
     $user_id=$_SESSION["id_u"];
     $user_data_insc=$_SESSION['data_insc'];
 
+    //buscar o desporto, equipa e liga favorita do user
     $sql_sport="SELECT desporto.nome_d from desporto left join users on desporto.id_d = users.id_d where users.id_u=$user_id";
     $execute_sport = mysqli_query($ligacao, $sql_sport);
+    $numlinha1 = mysqli_num_rows($execute_sport);
 
     $sql_league="SELECT liga.nome_l from liga left join users on liga.id_l = users.id_l where users.id_u=$user_id";
     $execute_league = mysqli_query($ligacao, $sql_league);
+    $numlinha2 = mysqli_num_rows($execute_league);
 
     $sql_team="SELECT equipa.nome_e from equipa left join users on equipa.id_e = users.id_e where users.id_u=$user_id";
     $execute_team = mysqli_query($ligacao, $sql_team);
+    $numlinha3 = mysqli_num_rows($execute_team);
 
+    //Mudar username
     if (isset($_POST['change_username_save_btn'])) {
     	$new_username = $_POST["new_username"];
     	$select_u = mysqli_query($ligacao, "SELECT `username` FROM `users` WHERE `username` = '$new_username'") or exit(mysqli_error($ligacao));
@@ -56,6 +60,7 @@
 		}
     }
 
+    //Mudar email
     if (isset($_POST['change_email_save_btn'])) {
     	$new_email = $_POST["new_email"];
 
@@ -113,6 +118,7 @@
         }
 	}
 
+    //Mudar password
 	if (isset($_POST['change_password_save_btn'])) {
 		$new_password = $_POST["new_password"];
 		$new_password2 = $_POST["new_password2"];
@@ -172,7 +178,7 @@
 </head>
 <body>
 
-<!--função pra ir pra pag que gera o pdf, implmentado na class="col-md-2"-->
+<!--função pra ir pra pag que gera o pdf, implementado na class="col-md-2"-->
 <script>
 function go() {
   window.location.href="cpdf.php";
@@ -273,6 +279,7 @@ function go() {
                 <div class="row">
                     <div class="col-md-4">
 
+                    <!--Apresentação das informações do user -->
                     </div>
                     <div class="col-md-8">
                         <div class="tab-content profile-tab" id="myTabContent">
@@ -300,7 +307,8 @@ function go() {
                                             <div class="col-md-6">
                                                 <p>    
 <?php
-                                                    if ($execute_sport !== false) {
+                                                    //print do desporto, liga e equipa favorita
+                                                    if ($numlinha1 != NULL) {
                                                         while($linha = $execute_sport -> fetch_assoc()){
                                                             echo $linha["nome_d"];
                                                         }
@@ -318,7 +326,7 @@ function go() {
                                             <div class="col-md-6">
                                                 <p>
 <?php
-                                                    if ($execute_league !== false) {
+                                                    if ($numlinha2 != NULL) {
                                                         while($linha = mysqli_fetch_array($execute_league)){
                                                             echo $linha['nome_l'];
                                                         }
@@ -336,7 +344,7 @@ function go() {
                                             <div class="col-md-6">
                                                 <p>
 <?php
-                                                    if ($execute_team !== false) {
+                                                    if ($numlinha3 != NULL) {
                                                         while($linha = mysqli_fetch_array($execute_team)){
                                                             echo $linha['nome_e'];
                                                         }
