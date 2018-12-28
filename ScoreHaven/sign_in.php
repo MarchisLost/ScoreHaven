@@ -132,6 +132,7 @@
               <div class="custom-control custom-checkbox mb-3">
                 <input type="checkbox" class="custom-control-input" id="customCheck1">
                 <label class="custom-control-label" for="customCheck1">Remember password</label>
+                <a id="forgot_password" href="">&emsp; &emsp; &emsp; &emsp; &emsp; Forgot Password?</a>
               </div>
               <button class="btn btn-lg btn-primary btn-block text-uppercase" name="login_btn" type="submit">Sign in</button>
             </form>

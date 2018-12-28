@@ -43,6 +43,10 @@ footer{
     height:auto;
 }
 
+#forgot_password {
+  font-size: 13px;
+}
+
 .card-signin {
   border: 0;
   border-radius: 1rem;
