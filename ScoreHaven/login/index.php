@@ -114,8 +114,8 @@
 					            <a class="nav-link dropdown-toggle waves-effect waves-light" id="navbarDropdownMenuLink-4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
 					              <i class="fa fa-user"></i> My Profile </a>
 					            <div class="dropdown-menu dropdown-menu-right dropdown-info" aria-labelledby="navbarDropdownMenuLink-4">
-					              <a class="dropdown-item waves-effect waves-light" href="#">My account</a>
-					              <a class="dropdown-item waves-effect waves-light" href="#">Log out</a>
+					              <a class="dropdown-item waves-effect waves-light" href="user_profile.php">My account</a>
+					              <a class="dropdown-item waves-effect waves-light" href="../logoff.php">Log out</a>
 					            </div>
 					          </li>
 					        </ul>

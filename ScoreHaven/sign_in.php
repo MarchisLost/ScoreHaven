@@ -106,7 +106,6 @@
       <!--<script>
         alert("O seu username ou password estão incorretos \nTorne a inserir os dados! \nObrigado!");
       </script>-->
-
 <?php
     }
   }
