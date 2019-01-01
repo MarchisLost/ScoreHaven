@@ -39,7 +39,7 @@
 <?php
 		}
 		else{
-			$sql_username_change = "UPDATE users SET username='$new_username' WHERE id='$user_id'";
+			$sql_username_change = "UPDATE users SET username='$new_username' WHERE id_u='$user_id'";
     		mysqli_query($ligacao, $sql_username_change);
 
 ?>

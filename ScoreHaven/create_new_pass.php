@@ -3,7 +3,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO 8859-1">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>ScoreHaven - Sign in</title>
+    <title>ScoreHaven - Create New Password</title>
 
   <!-- All sizes including Android,iOS... Favicon -->
   <link rel="apple-touch-icon-precomposed" sizes="57x57" href="img/favicon/apple-touch-icon-57x57.png" />
@@ -50,87 +50,34 @@
 </head>
 <body>
 
-<!-- Confirmação dos dados inseridos pelo utilizador -->
-<?php
-  header("Content-Type: text/html; charset=ISO 8859-1",true);
-
-  include 'conecta_bd.php';
-
-  if(isset($_POST["login_btn"])){ 
-
-    session_start();
-
-    $name= $_POST["username"]; //receber os dados que o utilizador escreveu
-
-    //codigo pra ir buscar o salt a bd
-    /*$sql_salt="select salt from encript";                 
-    $sql_s= mysqli_query($ligacao, $sql_salt);
-    $salt= mysqli_fetch_assoc($sql_s);*/
-    //echo $salt; //debug
-
-    //$salt="pedro123david";
-    $passw=md5($_POST["password"]);
-    //echo $passw; debug
-    $sql_r="select password from users where username= '$name'";
-    $sql_pw= mysqli_query($ligacao, $sql_r);
-    $pw= mysqli_fetch_assoc($sql_pw);
-     
-    //compara a pw que o utilizador com a que esta guardada na bd
-    //se for verdadeiro vai buscar os dados a bd sobre esse utilizador e gurdados na session onde vao ser usados no dados.php
-    if($pw["password"] == $passw){
-      $sel_sql="select username,email,id_u, data_insc from users where username= '$name'";
-      $info= mysqli_query($ligacao, $sel_sql);
-      $data= mysqli_fetch_assoc($info);
-
-      $_SESSION["username"]=$data['username'];
-      $_SESSION["email"]=$data['email'];
-      $_SESSION["id_u"]=$data['id_u'];
-      $_SESSION["data_insc"]=$data['data_insc'];
-      //echo "aaaaaaaaaaaaaaahhh"; //debug
-
-      header("Location: login/user_profile.php");
-
-    }else{
-?>
-      <div class="container">
-        <div class="alert alert-warning">
-          <strong>Warning!</strong> Username or password incorrect, try again please.
-        </div>
-      </div>
-
-      <!--ou-->
-
-      <!--<script>
-        alert("O seu username ou password estão incorretos \nTorne a inserir os dados! \nObrigado!");
-      </script>-->
-<?php
-    }
-  }
-?>  
-
   <div class="container">
     <div class="row">
       <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
         <div class="card card-signin my-5">
           <div class="card-body">
-            <h5 class="card-title text-center">Sign In</h5>
-            <form class="form-signin" method="post">
+            <form class="form-signin" action="Create_email_new_pass" method="post">
               <div class="form-label-group">
-                <input type="text" id="inputUsername" name="username" class="form-control" placeholder="Username" required autofocus>
-                <label for="inputUsername">Username</label>
-              </div>
+                <?php 
+                $selector = $_GET["selector"];
+                $validator = $_GET["valdiator"];
 
-              <div class="form-label-group">
-                <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
-                <label for="inputPassword">Password</label>
+                if(empty($selector) || empty($validator)){
+                    echo "Could not validaete your request!";
+                }elseif(ctype_xdigit($selector) == true && ctype_xdigit($validator) == true){
+?>
+                    <form action="reset_pwd" method="post">
+                        <input class="form-control" type="hidden" name="selector" value="<?php echo $selector ?>">
+                        <input class="form-control" type="hidden" name="validator" value="<?php echo $validator ?>">
+                        <input class="form-control" type="password" name="pwd" placehodler="Enter New password">
+                        <input class="form-control" type="password" name="pwd2" placehodler="Enter New password again">
+                        <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit" name="newpwd_btn">Reset Password</button>
+                    </form>
+<?php
+                }
+                ?>
+                <input type="text" id="inputUsername" name="email" class="form-control" placeholder="Enter you e-mail adress" required autofocus>
+                <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit" name="request_new_pass">Receive new password by email</button>
               </div>
-
-              <div class="custom-control custom-checkbox mb-3">
-                <input type="checkbox" class="custom-control-input" id="customCheck1">
-                <label class="custom-control-label" for="customCheck1">Remember password</label>
-                <a id="forgot_password" href="reset_pass_request.php"> &emsp; &emsp; &emsp; &emsp; Forgot Password?</a>
-              </div>
-              <button class="btn btn-lg btn-primary btn-block text-uppercase" name="login_btn" type="submit">Sign in</button>
             </form>
           </div>
         </div>
