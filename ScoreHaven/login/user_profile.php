@@ -244,14 +244,29 @@ function go() {
 <div class="container emp-profile">
             <form method="post">
                 <div class="row">
-                    <div class="col-md-4">
-                        <div class="profile-img">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog" alt=""/>
-                            <div class="file btn btn-lg btn-primary">
-                                Change Photo
-                                <input type="file" name="file"/>
+                    <div class="col-md-4"> 
+                        <form action="upload_pic.php" metod="post" enctype="multipart/form-data">
+                            <div class="profile-img"> 
+<?php
+                                $sql = "SELECT img_p FROM users WHERE id_u = $user_id";
+                                $res = mysqli_query($ligacao, $sql);
+
+                                //Even tho the next 2 lines output the same thing, the first one is used in OOP, while the 2nd one not, so ill use the seond one unless ill work in OOP
+                                //while($row = $sql -> fectch_assoc())
+                                while($row = mysqli_fetch_assoc($res)){
+                                    if($row["img_p"] != NULL){
+                                        $imgP = base64_encode($row["img_p"]);
+                                        echo '<img src = "data:image/jpeg;base64, '.$imgP.'"  />';
+                                    }else{
+                                        echo '<img src="uploads/profileD.jpg" alt="Profile Picture"/>';
+                                    }
+                                }
+?>
+                                <div class="file btn btn-lg btn-primary" data-toggle="modal" data-target="#exampleModal">
+                                    Change Photo
+                                </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
                     <div class="col-md-6">
                         <div class="profile-head">
@@ -284,77 +299,77 @@ function go() {
                     <div class="col-md-8">
                         <div class="tab-content profile-tab" id="myTabContent">
                             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Username</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p><?php echo $_SESSION["username"];?></p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Email</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p><?php echo $_SESSION["email"];?></p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Favourite Sport</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p>    
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Username</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p><?php echo $_SESSION["username"];?></p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Email</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p><?php echo $_SESSION["email"];?></p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Favourite Sport</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>    
 <?php
-                                                    //print do desporto, liga e equipa favorita
-                                                    if ($numlinha1 != NULL) {
-                                                        while($linha = $execute_sport -> fetch_assoc()){
-                                                            echo $linha["nome_d"];
-                                                        }
-                                                    }else {
-                                                        echo 'Choose one on the settings tab';
-                                                    }
+                                            //print do desporto, liga e equipa favorita
+                                            if ($numlinha1 != NULL) {
+                                                while($linha = $execute_sport -> fetch_assoc()){
+                                                    echo $linha["nome_d"];
+                                                }
+                                            }else {
+                                                echo 'Choose one on the settings tab';
+                                            }
 ?>
-                                                </p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Favourite League</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Favourite League</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>
 <?php
-                                                    if ($numlinha2 != NULL) {
-                                                        while($linha = mysqli_fetch_array($execute_league)){
-                                                            echo $linha['nome_l'];
-                                                        }
-                                                    }else {
-                                                        echo 'Choose one on the settings tab';
-                                                    }
+                                            if ($numlinha2 != NULL) {
+                                                while($linha = mysqli_fetch_array($execute_league)){
+                                                    echo $linha['nome_l'];
+                                                }
+                                            }else {
+                                                echo 'Choose one on the settings tab';
+                                            }
 ?>
-                                                </p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Favourite Team</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Favourite Team</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>
 <?php
-                                                    if ($numlinha3 != NULL) {
-                                                        while($linha = mysqli_fetch_array($execute_team)){
-                                                            echo $linha['nome_e'];
-                                                        }
-                                                    }else {
-                                                        echo 'Choose one on the settings tab';
-                                                    }
+                                            if ($numlinha3 != NULL) {
+                                                while($linha = mysqli_fetch_array($execute_team)){
+                                                    echo $linha['nome_e'];
+                                                }
+                                            }else {
+                                                echo 'Choose one on the settings tab';
+                                            }
 ?>
-                                                </p>
-                                            </div>
-                                        </div>
+                                        </p>
+                                    </div>
+                                </div>
                             </div>
                             <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                                         <div class="row">
@@ -473,6 +488,30 @@ function go() {
             </form>           
         </div>
 <!-- End of Main Content -->
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="upload_pic.php" method="POST" enctype="multipart/form-data" >
+        <input class="btn btn-light" type="file" name="file">
+        <button type="submit" class="btn btn-light" name="submit_img" value="img_send">Upload</button>                                                                                 
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End of Modal -->
 
 <!-- Footer -->
     <footer class="bg-dark">

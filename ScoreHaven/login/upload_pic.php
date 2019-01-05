@@ -1,50 +1,56 @@
 <?php
-$target_dir = "uploads/";
-$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
-$uploadOk = 1;
-$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
 
-// Check if image file is a actual image or fake image
-if(isset($_POST["submit"])) {
-    $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
-    if($check !== false) {
-        echo "File is an image - " . $check["mime"] . ".";
-        $uploadOk = 1;
-    } else {
-        echo "File is not an image.";
-        $uploadOk = 0;
+session_start();
+include '../conecta_bd.php';
+
+$id = $_SESSION["id_u"];
+
+if(isset($_POST["submit_img"])){
+
+    $img_ready = addslashes(file_get_contents($_FILES['file']['tmp_name']));
+    $sql = "UPDATE users SET img_p= '".$img_ready."' WHERE users.id_u= ".$id;
+    $res = mysqli_query($ligacao, $sql);
+    if($res){
+        header("Location: user_profile.php");
+    }else{
+        echo "And error has occured, please try again";
     }
-}
 
-// Check if file already exists
-if (file_exists($target_file)) {
-    echo "Sorry, file already exists.";
-    $uploadOk = 0;
-}
 
-// Check file size
-if ($_FILES["fileToUpload"]["size"] > 500000) {
-    echo "Sorry, your file is too large.";
-    $uploadOk = 0;
-}
+    //Neste momento as imagens estao a ser guardadas na base de dados, no entanto este codigo permite que sejam guardadas numa pasta
+    /*$file = $_FILES["file"];
+    // echo "$file"; //debug
 
-// Allow certain file formats
-if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-&& $imageFileType != "gif" ) {
-    echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
-    $uploadOk = 0;
-}
+    //$_FILE da um Array que e composto por (name, type, tmp_name(diretivo), error, size)
+    $fileName = $_FILES["file"]["name"];
+    $fileTmpName = $_FILES["file"]["tmp_name"];
+    $fileSize = $_FILES["file"]["size"];
+    $fileError = $_FILES["file"]["error"];
+    $fileType = $_FILES["file"]["type"];
 
-// Check if $uploadOk is set to 0 by an error
-if ($uploadOk == 0) {
-    echo "Sorry, your file was not uploaded.";
+    //o nome vem como 'nome.type', aqui vamos separar os dois
+    $fileExt = explode('.', $fileName);
+    $fileActualExt = strtolower(end($fileExt));
 
-    // if everything is ok, try to upload file
-} else {
-    if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-        echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
-    } else {
-        echo "Sorry, there was an error uploading your file.";
-    }
-}
+    $allowed = array('jpg', 'jpeg', 'png');
+
+    if(in_array($fileActualExt, $allowed)){
+        if($fileError === 0){
+            if($fileSize < 500000){
+                $fileNameNew = "profile" .$id ."." .$fileActualExt; //e criado o nome da imagem
+                $fileDestination = 'uploads/' .$fileNameNew; // sitio onde vai ser guardada
+                move_uploaded_file($fileTmpName, $fileDestination); // comando que guarda a imagem no git
+
+                header("Location: user_profile.php");
+            }else{
+                echo "Your file is too big! It has to be less than 5Mb.";
+            }
+        }else{
+            echo "There was an error uploading your file! Please try again";
+        }
+    }else{
+        echo "You cannot upload images of this type, try jpg, jpeg or png";
+    }*/
+
+}   
 ?>
