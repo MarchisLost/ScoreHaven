@@ -178,12 +178,7 @@
 </head>
 <body>
 
-<!--função pra ir pra pag que gera o pdf, implementado na class="col-md-2"-->
-<script>
-function go() {
-  window.location.href="cpdf.php";
-}
-</script>
+
 
 
 <!-- Navigation bar -->
@@ -248,6 +243,7 @@ function go() {
                         <form action="upload_pic.php" metod="post" enctype="multipart/form-data">
                             <div class="profile-img"> 
 <?php
+                                //Seleçao da imagem de perfil, se houver uma na bd daquele user usa se essa, caso contrario fica a default
                                 $sql = "SELECT img_p FROM users WHERE id_u = $user_id";
                                 $res = mysqli_query($ligacao, $sql);
 
@@ -286,10 +282,14 @@ function go() {
                                 </li>
                             </ul>
                         </div>
-                    </div>
+                    </div> 
+                    
+                    <!-- Botao para criar PDF -->
                     <div class="col-md-2">
-                        <input type="submit" class="profile-edit-btn" name="btnAddMore" onclick= "go()" value="PDF"/> <!-- Botao PDF -->
-                    </div>
+                        <form action = "cpdf.php">
+                            <input type="submit" class="profile-edit-btn" name="btncrtPDF" value="PDF"/> 
+                        </form>
+                    </div>                   
                 </div>
                 <div class="row">
                     <div class="col-md-4">
@@ -524,7 +524,6 @@ function go() {
     </footer>
 <!-- End of Footer -->
 
-
 <script type="text/javascript">
 
     $("#change_username_btn").click(function() {
@@ -556,7 +555,6 @@ function go() {
         $("#change_email_form").hide();
         $("#change_email_btn").show();
     });
-
 </script>
 
 </body>

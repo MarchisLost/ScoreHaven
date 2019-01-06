@@ -1,6 +1,6 @@
 <?php
 require 'fpdf181\fpdf.php';
-include '..\conecta_bd.php';
+include '../conecta_bd.php';
 
 //A4 width : 219mm
 //default margin : 10mm each side
@@ -15,12 +15,12 @@ $pdf->SetFont('Arial','B',14);
 //Cell ( width, height, text, border, end line, [align], fill, link)
 
 //Cabeçalho
-$pdf->Cell(130,6,'Pool Statistics',0,0,'L');
+$pdf->Cell(130,6,'User Information',0,0,'L');
 $pdf->Cell(59,6,'2018/19',0,1,'R');//End line
 $pdf->Ln(2);//pequeno break entre as duas linhas
 
-$pdf->SetFont('Arial','',12);
-$pdf->Cell(130,6,'Resuls',0,1,'L');//End line
+/*$pdf->SetFont('Arial','',12);
+$pdf->Cell(130,6,'Resuls',0,1,'L');//End line*/
 
 //Ln -> Line break (height), By default, the value equals the height of the last printed cell.
 $pdf->Ln(12);
@@ -63,7 +63,9 @@ $pdf->Cell(94.5,5,$dados['nome_e'],1,1,'L',0);//end line
 
 $pdf->Ln(15);//break entre tabelas
 
-/*----------------------------table deporto----------------------------------------*/
+
+/*
+//----------------------------table deporto----------------------------------------
 //Table2 deporto Title
 //Cell ( width, height, text, border, end line, [align], fill, link)
 $pdf->SetFillColor(255, 0, 128);
@@ -82,7 +84,7 @@ $pdf->Cell(94.5,5,'Ir bd',1,1,'L',0);//end line
 
 $pdf->Ln(15);//break entre tabelas
 
-/*----------------------------table liga-------------------------------------------*/
+//----------------------------table liga-------------------------------------------
 //Table3 liga Title
 //Cell ( width, height, text, border, end line, [align], fill, link)
 $pdf->SetFillColor(255, 0, 128);
@@ -101,7 +103,7 @@ $pdf->Cell(94.5,5,'Ir bd',1,1,'L',0);//end line
 
 $pdf->Ln(15);//break entre tabelas
 
-/*----------------------------table equipa-----------------------------------------*/
+//----------------------------table equipa-----------------------------------------
 //Table4 equipa Title
 //Cell ( width, height, text, border, end line, [align], fill, link)
 $pdf->SetFillColor(255, 0, 128);
@@ -117,6 +119,7 @@ $pdf->Cell(94.5,5,'ir buscar bd',1,0,'L',1);
 $pdf->Cell(94.5,5,'Ir bd',1,1,'L',1);//end line
 $pdf->Cell(94.5,5,'ir buscar bd',1,0,'L',0);
 $pdf->Cell(94.5,5,'Ir bd',1,1,'L',0);//end line
+*/
 
 $pdf-> Output();
 ob_end_flush();
