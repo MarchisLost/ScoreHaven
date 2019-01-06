@@ -256,7 +256,7 @@ function go() {
                                 while($row = mysqli_fetch_assoc($res)){
                                     if($row["img_p"] != NULL){
                                         $imgP = base64_encode($row["img_p"]);
-                                        echo '<img height="240" width="240" src = "data:image/jpeg;base64, '.$imgP.'"  />';
+                                        echo '<img src = "data:image/jpeg;base64, '.$imgP.'"  />';
                                     }else{
                                         echo '<img src="uploads/profileD.jpg" alt="Profile Picture"/>';
                                     }
@@ -442,42 +442,22 @@ function go() {
                                                 <label>Change Favorite Sport</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <button type="button" id="change_sport_btn" class="btn btn-primary btn-sm" data-toggle="collapse" data-target="#change_sport_form">Change</button>
-                                                <div class="collapse" id="change_sport_form">
-                                                    <form method="post">
-                                                        <select name="select_fav_sport"class="form-control" onchange="return getval(this);">
-                                                            <?php 
-                                                                $sql = mysqli_query($ligacao, "SELECT sport_name FROM sport");
-                                                                while ($row = $sql->fetch_assoc()){
-                                                                    echo "<option value=\"{$row['sport_name']}\">{$row['sport_name']}</option>";
-                                                                }
-                                                            ?>
-                                                        </select> 
-                                                         <div id="result"></div>                                             
-                                                    </form>
-                                                </div>  
-                                            </div>
-                                             
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Change Favorite League</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <button type="button" id="change_league_btn" class="btn btn-primary btn-sm" data-toggle="collapse" data-target="#change_league_form">Change</button>
-                                                <div class="collapse" id="change_league_form">
-                                                    <form method="post">
-                                                        <select name="select_fav_league"class="form-control" onchange="return getval2(this);">
-                                                            <?php 
-                                                                $sql = mysqli_query($ligacao, "SELECT league_name FROM league WHERE id_s IN (SELECT fav_s FROM users WHERE id='$user_id')");
-                                                                while ($row = $sql->fetch_assoc()){
-                                                                    echo "<option value=\"{$row['league_name']}\">{$row['league_name']}</option>";
-                                                                }
-                                                            ?>
-                                                        </select> 
-                                                         <div id="result2"></div>                                             
-                                                    </form>
-                                                </div>
+                                                <div class="dropdown scrollable-menu">
+												  <button class="btn btn-default btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+												    Pick one
+												  </button>
+												  <div class="dropdown-menu force-scroll" aria-labelledby="dropdownMenuButton">
+												    <a class="dropdown-item" href="#">Action</a>
+												    <a class="dropdown-item" href="#">Another action</a>
+												    <a class="dropdown-item" href="#">Something else here</a>
+												    <a class="dropdown-item" href="#">Action</a>
+												    <a class="dropdown-item" href="#">Another action</a>
+												    <a class="dropdown-item" href="#">Something else here</a>
+												    <a class="dropdown-item" href="#">Action</a>
+												    <a class="dropdown-item" href="#">Another action</a>
+												    <a class="dropdown-item" href="#">Something else here</a>
+												  </div>
+												</div>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -485,28 +465,20 @@ function go() {
                                                 <label>Change Favorite Team</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <button type="button" id="change_team_btn" class="btn btn-primary btn-sm" data-toggle="collapse" data-target="#change_team_form">Change</button>
-                                                <div class="collapse" id="change_team_form">
-                                                    <form method="post">
-                                                        <select name="select_fav_team"class="form-control" onchange="return getval3(this);">
-                                                            <?php 
-                                                                $sql = mysqli_query($ligacao, "SELECT team_name FROM team WHERE id_s IN (SELECT fav_s FROM users WHERE id='$user_id') ORDER BY team_name");
-                                                                while ($row = $sql->fetch_assoc()){
-                                                                    echo "<option value=\"{$row['team_name']}\">{$row['team_name']}</option>";
-                                                                }
-                                                            ?>
-                                                        </select> 
-                                                        <div id="result3"></div>                                             
-                                                    </form>
-                                                </div>
+                                                <p>Caixa de texto para atualizar o campo na bd</p>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <label id="note_color"> Note: You can only change one setting at the time.
-                                                    <br>
-                                                    Choose favorite sport first to be able to choose a league.
-                                                </label>
+                                                <label>Change Favorite Player</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>Caixa de texto para atualizar o campo na bd</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label id="note_color"> Note: You can only change one setting at the time</label>
                                             </div>
                                         </div>
                             </div>
@@ -584,69 +556,6 @@ function go() {
         $("#change_email_form").hide();
         $("#change_email_btn").show();
     });
-
-    function getval(sel) {
-        var fav_sport = sel.value;
-        var htm = $.ajax({
-        type: "POST",
-        url: "update_sport.php",
-        data: "fav_sport=" + fav_sport,
-        async: false
-        }).responseText;
-
-        if(htm)
-        {
-            $("#result").html(htm);
-            return true;
-        }
-        else
-        {
-            $("#result").html("no result found");
-            return false;
-        }
-    }
-
-    function getval2(sel) {
-        var fav_league = sel.value;
-        var htm = $.ajax({
-        type: "POST",
-        url: "update_league.php",
-        data: "fav_league=" + fav_league,
-        async: false
-        }).responseText;
-
-        if(htm)
-        {
-            $("#result2").html(htm);
-            return true;
-        }
-        else
-        {
-            $("#result2").html("no result found");
-            return false;
-        }
-    }
-
-    function getval3(sel) {
-        var fav_team = sel.value;
-        var htm = $.ajax({
-        type: "POST",
-        url: "update_team.php",
-        data: "fav_team=" + fav_team,
-        async: false
-        }).responseText;
-
-        if(htm)
-        {
-            $("#result3").html(htm);
-            return true;
-        }
-        else
-        {
-            $("#result3").html("no result found");
-            return false;
-        }
-    }
 
 </script>
 
