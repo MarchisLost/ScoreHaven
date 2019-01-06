@@ -372,142 +372,143 @@ function go() {
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label>Change Username</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <button type="button" id="change_username_btn" class="btn btn-primary btn-sm" data-toggle="collapse" data-target="#change_username_form">Change</button>
-                                        <div class="collapse" id="change_username_form">
-                                            <form method="post">
-                                                <p>
-                                                    <input type="text" class="form-control" name="new_username" required="required" placeholder="Enter new username...">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Change Username</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <button type="button" id="change_username_btn" class="btn btn-primary btn-sm" data-toggle="collapse" data-target="#change_username_form">Change</button>
+                                                <div class="collapse" id="change_username_form">
+                                                    <form method="post">
+                                                        <p>
+                                                            <input type="text" class="form-control" name="new_username" required="required" placeholder="Enter new username...">
+                                                            <br>
+                                                            <button type="submit" name="change_username_save_btn" id="change_username_save_btn" class="btn btn-success btn-sm">
+                                                              <span class="glyphicon glyphicon-ok"></span> Save 
+                                                            </button>
+                                                            <input class="btn btn-default btn-sm" id="change_username_cancel_btn" type="reset" value="Cancel">
+                                                            <span class="glyphicon glyphicon-remove"></span>
+                                                        </p> 
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Change Password</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <button type="button" id="change_password_btn" class="btn btn-primary btn-sm" data-toggle="collapse" data-target="#change_password_form">Change</button>
+                                                <div class="collapse" id="change_password_form">
+                                                    <form method="post">
+                                                        <p>
+                                                            <input type="password" class="form-control" name="new_password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required="required" placeholder="Enter new password...">
+                                                            <br>
+                                                            <input type="password" class="form-control" name="new_password2" required="required" placeholder="Confirm new password...">
+                                                            <br>
+                                                            <button type="submit" class="btn btn-success btn-sm" class="change_password_save_btn" name="change_password_save_btn" id="change_password_save_btn">
+                                                              <span class="glyphicon glyphicon-ok"></span> Save 
+                                                            </button>
+                                                            <input class="btn btn-default btn-sm" id="change_password_cancel_btn" type="reset" value="Cancel">
+                                                            <span class="glyphicon glyphicon-remove"></span>
+                                                        </p>    
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Change Email</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <button type="button" id="change_email_btn" class="btn btn-primary btn-sm" data-toggle="collapse" data-target="#change_email_form">Change</button>
+                                                <div class="collapse" id="change_email_form">
+                                                    <form method="post">
+                                                        <p>
+                                                          <input type="email" class="form-control" required="required" name="new_email" placeholder="Enter new email...">
+                                                          <br>  
+                                                            <button type="submit" name="change_email_save_btn" id="change_email_save_btn" class="btn btn-success btn-sm">
+                                                                <span class="glyphicon glyphicon-ok"></span> Save 
+                                                            </button>
+                                                            <input class="btn btn-default btn-sm" id="change_email_cancel_btn" type="reset" value="Cancel">
+                                                            <span class="glyphicon glyphicon-remove"></span>
+                                                        </p>                                                 
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Change Favorite Sport</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <button type="button" id="change_sport_btn" class="btn btn-primary btn-sm" data-toggle="collapse" data-target="#change_sport_form">Change</button>
+                                                <div class="collapse" id="change_sport_form">
+                                                    <form method="post">
+                                                        <select name="select_fav_sport"class="form-control" onchange="return getval(this);">
+                                                            <?php 
+                                                                $sql = mysqli_query($ligacao, "SELECT sport_name FROM sport");
+                                                                while ($row = $sql->fetch_assoc()){
+                                                                    echo "<option value=\"{$row['sport_name']}\">{$row['sport_name']}</option>";
+                                                                }
+                                                            ?>
+                                                        </select> 
+                                                         <div id="result"></div>                                             
+                                                    </form>
+                                                </div>  
+                                            </div>
+                                             
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Change Favorite League</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <button type="button" id="change_league_btn" class="btn btn-primary btn-sm" data-toggle="collapse" data-target="#change_league_form">Change</button>
+                                                <div class="collapse" id="change_league_form">
+                                                    <form method="post">
+                                                        <select name="select_fav_league"class="form-control" onchange="return getval2(this);">
+                                                            <?php 
+                                                                $sql = mysqli_query($ligacao, "SELECT league_name FROM league WHERE id_s IN (SELECT fav_s FROM users WHERE id='$user_id')");
+                                                                while ($row = $sql->fetch_assoc()){
+                                                                    echo "<option value=\"{$row['league_name']}\">{$row['league_name']}</option>";
+                                                                }
+                                                            ?>
+                                                        </select> 
+                                                         <div id="result2"></div>                                             
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Change Favorite Team</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <button type="button" id="change_team_btn" class="btn btn-primary btn-sm" data-toggle="collapse" data-target="#change_team_form">Change</button>
+                                                <div class="collapse" id="change_team_form">
+                                                    <form method="post">
+                                                        <select name="select_fav_team"class="form-control" onchange="return getval3(this);">
+                                                            <?php 
+                                                                $sql = mysqli_query($ligacao, "SELECT team_name FROM team WHERE id_s IN (SELECT fav_s FROM users WHERE id='$user_id') ORDER BY team_name");
+                                                                while ($row = $sql->fetch_assoc()){
+                                                                    echo "<option value=\"{$row['team_name']}\">{$row['team_name']}</option>";
+                                                                }
+                                                            ?>
+                                                        </select> 
+                                                        <div id="result3"></div>                                             
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label id="note_color"> Note: You can only change one setting at the time.
                                                     <br>
-                                                    <button type="submit" name="change_username_save_btn" id="change_username_save_btn" class="btn btn-success btn-sm">
-                                                        <span class="glyphicon glyphicon-ok"></span> Save 
-                                                    </button>
-                                                    <input class="btn btn-default btn-sm" id="change_username_cancel_btn" type="reset" value="Cancel">
-                                                    <span class="glyphicon glyphicon-remove"></span>
-                                                </p> 
-                                            </form>
+                                                    Choose favorite sport first to be able to choose a league.
+                                                </label>
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label>Change Password</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <button type="button" id="change_password_btn" class="btn btn-primary btn-sm" data-toggle="collapse" data-target="#change_password_form">Change</button>
-                                        <div class="collapse" id="change_password_form">
-                                            <form method="post">
-                                                <p>
-                                                    <input type="password" class="form-control" name="new_password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required="required" placeholder="Enter new password...">
-                                                    <br>
-                                                    <input type="password" class="form-control" name="new_password2" required="required" placeholder="Confirm new password...">
-                                                    <br>
-                                                    <button type="submit" class="btn btn-success btn-sm" class="change_password_save_btn" name="change_password_save_btn" id="change_password_save_btn">
-                                                        <span class="glyphicon glyphicon-ok"></span> Save 
-                                                    </button>
-                                                    <input class="btn btn-default btn-sm" id="change_password_cancel_btn" type="reset" value="Cancel">
-                                                    <span class="glyphicon glyphicon-remove"></span>
-                                                </p>    
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label>Change Email</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <button type="button" id="change_email_btn" class="btn btn-primary btn-sm" data-toggle="collapse" data-target="#change_email_form">Change</button>
-                                        <div class="collapse" id="change_email_form">
-                                            <form method="post">
-                                                <p>
-                                                    <input type="email" class="form-control" required="required" name="new_email" placeholder="Enter new email...">
-                                                    <br>  
-                                                    <button type="submit" name="change_email_save_btn" id="change_email_save_btn" class="btn btn-success btn-sm">
-                                                        <span class="glyphicon glyphicon-ok"></span> Save 
-                                                    </button>
-                                                    <input class="btn btn-default btn-sm" id="change_email_cancel_btn" type="reset" value="Cancel">
-                                                    <span class="glyphicon glyphicon-remove"></span>
-                                                </p>                                                 
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label>Change Favorite Sport</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <button type="button" id="change_sport_btn" class="btn btn-primary btn-sm" data-toggle="collapse" data-target="#change_sport_form">Change</button>
-                                        <div class="collapse" id="change_sport_form">
-                                            <form method="post">
-                                                <select name="select_fav_sport"class="form-control" onchange="return getval(this);">
-                                                    <?php 
-                                                        $sql = mysqli_query($ligacao, "SELECT sport_name FROM sport");
-                                                        while ($row = $sql->fetch_assoc()){
-                                                            echo "<option value=\"{$row['sport_name']}\">{$row['sport_name']}</option>";
-                                                        }
-                                                    ?>
-                                                </select> 
-                                                <div id="result"></div>                                             
-                                            </form>
-                                        </div>  
-                                    </div>                                       
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label>Change Favorite League</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <button type="button" id="change_league_btn" class="btn btn-primary btn-sm" data-toggle="collapse" data-target="#change_league_form">Change</button>
-                                        <div class="collapse" id="change_league_form">
-                                            <form method="post">
-                                                <select name="select_fav_league"class="form-control" onchange="return getval2(this);">
-                                                    <?php 
-                                                        $sql = mysqli_query($ligacao, "SELECT league_name FROM league WHERE id_s IN (SELECT fav_s FROM users WHERE id='$user_id')");
-                                                        while ($row = $sql->fetch_assoc()){
-                                                            echo "<option value=\"{$row['league_name']}\">{$row['league_name']}</option>";
-                                                        }
-                                                    ?>
-                                                </select> 
-                                                <div id="result2"></div>                                             
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label>Change Favorite Team</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <button type="button" id="change_team_btn" class="btn btn-primary btn-sm" data-toggle="collapse" data-target="#change_team_form">Change</button>
-                                        <div class="collapse" id="change_team_form">
-                                            <form method="post">
-                                                <select name="select_fav_team"class="form-control" onchange="return getval3(this);">
-                                                    <?php 
-                                                        $sql = mysqli_query($ligacao, "SELECT team_name FROM team WHERE id_s IN (SELECT fav_s FROM users WHERE id='$user_id') ORDER BY team_name");
-                                                        while ($row = $sql->fetch_assoc()){
-                                                            echo "<option value=\"{$row['team_name']}\">{$row['team_name']}</option>";
-                                                        }
-                                                    ?>
-                                                </select> 
-                                                <div id="result3"></div>                                             
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label id="note_color"> Note: You can only change one setting at the time.
-                                            <br>
-                                            Choose favorite sport first to be able to choose a league.
-                                        </label>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -593,10 +594,13 @@ function go() {
         async: false
         }).responseText;
 
-        if(htm){
+        if(htm)
+        {
             $("#result").html(htm);
             return true;
-        }else{
+        }
+        else
+        {
             $("#result").html("no result found");
             return false;
         }
@@ -611,10 +615,13 @@ function go() {
         async: false
         }).responseText;
 
-        if(htm){
+        if(htm)
+        {
             $("#result2").html(htm);
             return true;
-        }else{
+        }
+        else
+        {
             $("#result2").html("no result found");
             return false;
         }
@@ -629,10 +636,13 @@ function go() {
         async: false
         }).responseText;
 
-        if(htm){
+        if(htm)
+        {
             $("#result3").html(htm);
             return true;
-        }else{
+        }
+        else
+        {
             $("#result3").html("no result found");
             return false;
         }

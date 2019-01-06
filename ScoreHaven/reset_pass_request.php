@@ -3,7 +3,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO 8859-1">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>ScoreHaven - Reset Password request</title>
+    <title>ScoreHaven - Reset Password</title>
 
   <!-- All sizes including Android,iOS... Favicon -->
   <link rel="apple-touch-icon-precomposed" sizes="57x57" href="img/favicon/apple-touch-icon-57x57.png" />
