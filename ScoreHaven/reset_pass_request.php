@@ -58,7 +58,7 @@
             <h5 class="card-title text-center">Reset your password</h5>
             <form class="form-signin" action="Create_email_new_pass" method="post">
               <div class="form-label-group">
-                <input type="text" id="inputUsername" name="email" class="form-control" placeholder="Enter you e-mail adress" required autofocus>
+                <input type="text" id="inputUsername" name="email" class="form-control" placeholder="Enter your e-mail adress" required autofocus>
               </div>
               <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit" name="request_new_pass">Receive new password by email</button>
             </form>

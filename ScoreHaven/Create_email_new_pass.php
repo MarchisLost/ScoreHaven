@@ -51,7 +51,7 @@
 
         mail($to, $subject, $msg, $headers);
 
-        header("Location: ../reset_pass.?Reset=sucess");
+        header("Location: ../reset_pwd.?Reset=sucess");
 
     }else{
         header("Location: ../index.php");
