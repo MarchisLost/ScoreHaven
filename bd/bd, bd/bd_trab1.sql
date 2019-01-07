@@ -203,3 +203,6 @@ INNER JOIN Equipa ON equipas_liga_inglesa.id_equipa=Equipa.id_equipa
 
 /* Alterar a equipa a que um jogador pertence caso ocorra uma transferência */
 UPDATE Epoca SET Equipa=4 WHERE Jogador=1
+
+/* Criar um índice para o nome das equipas */
+CREATE INDEX nomes_equipas ON Equipa(nome)
