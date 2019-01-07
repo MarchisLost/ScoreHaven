@@ -134,6 +134,48 @@
 ?>
 
   <div class="container">
+
+     <!-- Navigation bar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+      <div class="container-fluid">
+            <a id="logo_navbar_text_type" class="navbar-brand" href="index">
+                <img src="img/sitelogo.svg" width="35" height="35" class="d-inline-block align-top" alt="">
+                Score<span id="logo_text_color">Haven</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>     
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                  <a class="nav-link" href="index">Soccer<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="basketball">Basketball</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="volleyball">Volleyball</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="hockey">Hockey</a>
+                </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Other
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="amfootball">AM.Football</a>
+                    <a class="dropdown-item" href="tennis">Tennis</a>
+                    <a class="dropdown-item" href="cricket">Cricket</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="iphone">Iphone</a>
+                </li>
+              </ul>
+          </div>
+        </div>
+    </nav>
+    <!-- End of Navigation Bar -->
+
     <div class="row">
       <div class="col-lg-10 col-xl-9 mx-auto">
         <div class="card card-signin flex-row my-5">

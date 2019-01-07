@@ -16,6 +16,7 @@ body {
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
+    padding-top: 160px;
 }
 
 /* Trick to make the footer stick to the bottom while not overlaping any content */
@@ -33,6 +34,14 @@ footer{
 
 footer{ 
     height:auto;
+}
+
+#logo_navbar_text_type {
+    font: normal 36px 'Cookie', cursive;
+}
+
+#logo_text_color {
+    color:  #732b2b;
 }
 
 .card-signin {

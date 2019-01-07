@@ -30,6 +30,7 @@ body {
 body{
     display:flex; 
     flex-direction:column;
+    padding-top: 150px;
 }
 
 footer{
@@ -41,10 +42,6 @@ footer{
 
 footer{ 
     height:auto;
-}
-
-#forgot_password {
-  font-size: 13px;
 }
 
 .card-signin {
