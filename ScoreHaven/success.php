@@ -18,7 +18,7 @@
 <body>
 	<div class="container text-center">
 		<h1 class="display-3">Thank You!</h1>
-		<p class="lead"><strong>Please check your email</strong> to activate your account</p>
+		<p class="lead"><strong>Please wait for an admin to activate your account</strong> </p>
 		<hr>
 		<p>
 			You will now be redirected to our Login page(Click the button below if it doesn't redirect you automatically)

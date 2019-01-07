@@ -128,7 +128,7 @@
           		<iframe frameborder="0"
                 	scrolling="no"
                 	id="chat_embed"
-                	src="https://www.twitch.tv/embed/itachi_the_exile/chat"
+                	src="https://www.twitch.tv/embed/scorehaven/chat"
                 	height="500"
                 	width="350">
             	</iframe>

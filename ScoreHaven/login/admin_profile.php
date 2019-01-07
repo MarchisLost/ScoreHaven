@@ -4,7 +4,7 @@
     include '../conecta_bd.php';
 
   	session_start();
-
+  	
     //variveis vem do sign in por session  
     $user_username=$_SESSION["username"];
     $user_email=$_SESSION["email"];
@@ -299,16 +299,16 @@
                     <div class="col-md-6">
                         <div class="profile-head">
                                     <h5>
-                                    	<?php echo $_SESSION["username"];?>'s Profile
+                                    	<?php echo $_SESSION["username"];?>'s Profile, Admin
                                     </h5>
                                     <h6>
                                         Idade: <?php echo $_SESSION["age"];?>
                                     </h6>
                                     <h6>
                                         <p></p><?php echo $_SESSION["email"];?></p>
-                                        <form method="post" action="sendMail">
-                                            <button type="submit" name="sendMail" id="sendMail" class="btn btn-success btn-sm">
-                                                <span class="glyphicon glyphicon-ok"></span> Contact Us 
+                                        <form method="post" action="activate_user">
+                                            <button type="submit" name="activate_user" id="activate_user" class="btn btn-success btn-sm">
+                                                <span class="glyphicon glyphicon-ok"></span> Manage Users 
                                             </button>
                                         </form>
                                     </h6>

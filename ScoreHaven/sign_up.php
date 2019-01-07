@@ -1,10 +1,93 @@
+<?php    
+    header("Content-Type: text/html; charset=ISO 8859-1",true);
+
+    include 'conecta_bd.php';
+
+    if (isset($_POST['register_btn'])) {
+
+        session_start();
+        
+        //informações introduzidas pelo utilizador
+        $username = $_POST["username"];
+        $email = $_POST["email"];
+        $age= $_POST["age"];
+        $password = $_POST["password"];
+        $password2 = $_POST["password2"];
+        $allowed_d = array('@gmail.com', '@outlook.com', '@outlook.pt'); //criaçao dos emails que sao aceitaveis de colocar
+
+        function match($allowed_d, $email) //criaçao da funçao para verificar se o mail e valido
+        {
+          foreach($allowed_d as $allowed){
+            if (strpos($email, $allowed) !== false) {
+              return true;
+            }
+          }
+          return false;
+        }
+
+        if(!match($allowed_d, $email)){//verifica se existe algum dos emails validos no email escrito pelo utilizador, caso
+        	//nao exista, e mostrado o aviso abaixo
+?>
+          <div class="container">
+            <div class="alert alert-warning">
+              <strong>Warning!</strong> Enter only trusted email address providers
+            </div>
+          </div>
+<?php
+        //Proximas linhas verificam se o username ou email ja existem
+        }elseif ($password == $password2) { //condiçao que verifica se a o email e/ou username ja esta em uso por outro utilizador
+        	//criaçao de variaveis que verificam se o email/username introduzido pelo user ja exista algures na bd
+          $select_u = mysqli_query($ligacao, "SELECT `username` FROM `users` WHERE `username` = '".$_POST['username']."'") or exit(mysqli_error($ligacao));
+          $select_m = mysqli_query($ligacao, "SELECT `email` FROM `users` WHERE `email` = '".$_POST['email']."'") or exit(mysqli_error($ligacao));
+          //Os 2 if abaixo sao para retornar avisos ao utilizador de que o email/username ja existe caso uma das variaveis encontre
+          //um username/email iguais
+          if(mysqli_num_rows($select_m)) {
+?>
+            <div class="container">
+              <div class="alert alert-warning">
+                <strong>Warning!</strong> The email is already being used
+              </div>
+            </div>
+<?php
+          }elseif(mysqli_num_rows($select_u)) {
+?>
+            <div class="container">
+              <div class="alert alert-warning">
+                <strong>Warning!</strong> Username already exists!
+              </div>
+            </div>
+<?php    
+          }
+          else{
+            $password = md5($password); //hash password before storing for security purposes
+            $insert = "INSERT INTO users (id_u, username, email,idade, data_insc, password, id_d, id_l, id_e, img_p) VALUES (NULL, '$username', '$email', '$age' , NULL, '$password', NULL, NULL, NULL, NULL )";      
+            if (mysqli_query($ligacao, $insert)) {
+              header("location: success.php");
+            } else {
+              echo "Error: " . $insert . "<br>" . mysqli_error($ligacao);
+            }        
+          } 
+        }else{
+?>
+          <div class="container">
+            <div class="alert alert-warning">
+              <strong>Warning!</strong> The 2 passwords must be equal!
+            </div>
+          </div>
+<?php
+        }
+    }
+ 
+    $ligacao -> close();
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; 
     charset=ISO 8859-1">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>ScoreHaven - Sign in</title>
+    <title>ScoreHaven - Sign up</title>
 
     <!-- All sizes including Android,iOS... Favicon -->
     <link rel="apple-touch-icon-precomposed" sizes="57x57" href="img/favicon/apple-touch-icon-57x57.png" />
@@ -50,88 +133,6 @@
 
 </head>
 <body>
-
-<?php    
-    header("Content-Type: text/html; charset=ISO 8859-1",true);
-
-    include 'conecta_bd.php';
-
-    if (isset($_POST['register_btn'])) {
-
-        session_start();
-        
-        //informações introduzidas pelo utilizador
-        $username = $_POST["username"];
-        $email = $_POST["email"];
-        $password = $_POST["password"];
-        $password2 = $_POST["password2"];
-        $allowed_d = array('@gmail.com', '@outlook.com', '@outlook.pt'); //criaçao dos emails que sao aceitaveis de colocar
-
-        function match($allowed_d, $email) //criaçao da funçao para verificar se o mail e valido
-        {
-          foreach($allowed_d as $allowed){
-            if (strpos($email, $allowed) !== false) {
-              return true;
-            }
-          }
-          return false;
-        }
-
-        if(!match($allowed_d, $email)){//verifica se existe algum dos emails validos no email escrito pelo utilizador, caso
-        	//nao exista, e mostrado o aviso abaixo
-?>
-          <div class="container">
-            <div class="alert alert-warning">
-              <strong>Warning!</strong> Enter only trusted email address providers
-            </div>
-          </div>
-<?php
-        //Proximas linhas verificam se o username ou email ja existem
-        }elseif ($password == $password2) { //condiçao que verifica se a o email e/ou username ja esta em uso por outro utilizador
-        	//criaçao de variaveis que verificam se o email/username introduzido pelo user ja exista algures na bd
-          $select_u = mysqli_query($ligacao, "SELECT `username` FROM `utilizador` WHERE `username` = '".$_POST['username']."'") or exit(mysqli_error($ligacao));
-          $select_m = mysqli_query($ligacao, "SELECT `email` FROM `utilizador` WHERE `email` = '".$_POST['email']."'") or exit(mysqli_error($ligacao));
-          //Os 2 if abaixo sao para retornar avisos ao utilizador de que o email/username ja existe caso uma das variaveis encontre
-          //um username/email iguais
-          if(mysqli_num_rows($select_m)) {
-?>
-            <div class="container">
-              <div class="alert alert-warning">
-                <strong>Warning!</strong> The email is already being used
-              </div>
-            </div>
-<?php
-          }elseif(mysqli_num_rows($select_u)) {
-?>
-            <div class="container">
-              <div class="alert alert-warning">
-                <strong>Warning!</strong> Username already exists!
-              </div>
-            </div>
-<?php    
-          }
-          else{
-            $password = md5($password); //hash password before storing for security purposes
-            $insert = "INSERT INTO utilizador (id_u, username, email, data_insc, pass, id_d, id_l, id_e) VALUES (NULL, '$username', '$email', NULL, '$password', NULL, NULL, NULL )";      
-            if (mysqli_query($ligacao, $insert)) {
-              header("location: success.php");
-            } else {
-              echo "Error: " . $insert . "<br>" . mysqli_error($ligacao);
-            }        
-          } 
-        }else{
-?>
-          <div class="container">
-            <div class="alert alert-warning">
-              <strong>Warning!</strong> The 2 passwords must be equal!
-            </div>
-          </div>
-<?php
-        }
-    }
- 
-    $ligacao -> close();
-?>
 
   <div class="container">
 
@@ -195,6 +196,11 @@
                 <label for="inputEmail">Email address</label>
               </div>
               
+              <div class="form-label-group">
+                <input type="text" pattern="^[0-9]*$" class="form-control" name="age" />
+                <label for="inputAge">Your Age</label>
+              </div>
+              
               <hr>
 
               <div class="form-label-group">
@@ -206,7 +212,7 @@
                 <input type="password" id="inputConfirmPassword" name="password2" class="form-control" placeholder="Password" required>
                 <label for="inputConfirmPassword">Confirm password</label>
               </div>
-
+              
               <button class="btn btn-lg btn-primary btn-block text-uppercase" name="register_btn" type="submit">Register</button>
               <a class="d-block text-center mt-2 small" href="sign_in.php">Sign In</a>
             </form>

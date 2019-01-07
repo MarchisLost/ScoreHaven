@@ -21,11 +21,15 @@
     $sql_r="select password from users where username= '$name'";
     $sql_pw= mysqli_query($ligacao, $sql_r);
     $pw= mysqli_fetch_assoc($sql_pw);
+    
+    $active="select active from users where username= '$name'";
+    $active_w= mysqli_query($ligacao, $active);
+    $actives= mysqli_fetch_assoc($active_w);
      
     //compara a pw que o utilizador com a que esta guardada na bd
     //se for verdadeiro vai buscar os dados a bd sobre esse utilizador e gurdados na session onde vao ser usados no dados.php
-    if($pw["password"] == $passw){
-      $sel_sql="select username,email,id_u, data_insc from users where username= '$name'";
+    if($pw["password"] == $passw && $actives["active"]!=0){
+      $sel_sql="select username,email, idade ,id_u, data_insc from users where username= '$name'";
       $info= mysqli_query($ligacao, $sel_sql);
       $data= mysqli_fetch_assoc($info);
 
@@ -33,9 +37,14 @@
       $_SESSION["email"]=$data['email'];
       $_SESSION["id_u"]=$data['id_u'];
       $_SESSION["data_insc"]=$data['data_insc'];
+      $_SESSION["age"]=$data['idade'];
       //echo "aaaaaaaaaaaaaaahhh"; //debug
-
+      if($actives["active"]==1){
       header("Location: login/user_profile.php");
+      }
+      elseif($actives["active"]==2){
+        header("Location: login/admin_profile.php");
+      }
 
     }else{
 ?>
