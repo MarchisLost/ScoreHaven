@@ -103,7 +103,6 @@
 		    	        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
 		    	          <a class="dropdown-item" href="amfootball">AM.Football</a>
 		    	          <a class="dropdown-item" href="tennis">Tennis</a>
-		    	          <a class="dropdown-item" href="cricket">Cricket</a>
 		    	          <div class="dropdown-divider"></div>
 		    	          <a class="dropdown-item" href="iphone"></a>
 		    	      </li>
