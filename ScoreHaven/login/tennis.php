@@ -104,7 +104,7 @@
 		    	          <a class="dropdown-item" href="tennis">Tennis</a>
 		    	          <a class="dropdown-item" href="cricket">Cricket</a>
 		    	          <div class="dropdown-divider"></div>
-		    	          <a class="dropdown-item" href="iphone">Iphone</a>
+		    	          <a class="dropdown-item" href="iphone"></a>
 		    	      </li>
 		    	    </ul>
 		    	    	<div class="collapse navbar-collapse" id="navbarSupportedContent-4">
@@ -113,8 +113,8 @@
 					            <a class="nav-link dropdown-toggle waves-effect waves-light" id="navbarDropdownMenuLink-4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
 					              <i class="fa fa-user"></i> My Profile </a>
 					            <div class="dropdown-menu dropdown-menu-right dropdown-info" aria-labelledby="navbarDropdownMenuLink-4">
-					              <a class="dropdown-item waves-effect waves-light" href="#">My account</a>
-					              <a class="dropdown-item waves-effect waves-light" href="#">Log out</a>
+					              <a class="dropdown-item waves-effect waves-light" href="user_profile">My account</a>
+					              <a class="dropdown-item waves-effect waves-light" href="../logoff">Log out</a>
 					            </div>
 					          </li>
 					        </ul>
