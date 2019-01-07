@@ -1,26 +1,11 @@
 <?php
 		$servidor = "localhost";
-		$utilizador = "root";
+		$utilizador = "id7329100_authentication";
 		$pass = "#Qwerty3";
-		$bd = "scorehaven";
+		$bd = "id7329100_authentication";
 		$ligacao = new mysqli($servidor, $utilizador, $pass, $bd);
 
 		if ($ligacao -> connect_error){
 			die("Erro de conexão" . $ligacao -> connect_error);
 		}
-
 ?>
-
-
-<!-- conexao a bd online quando estiver pronta e dar swap, SUPOSTAMENTE!
-
-		$servidor = "localhost";
-		$utilizador = "id8288012_sh";
-		$pass = "pedrodavid";
-		$bd = "id8288012_scorehaven";
-		$ligacao = new mysqli($servidor, $utilizador, $pass, $bd);
-
-		if ($ligacao -> connect_error){
-			die("Erro de conexão" . $ligacao -> connect_error);
-		}
--->
